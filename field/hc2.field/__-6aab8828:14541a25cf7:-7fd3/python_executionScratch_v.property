@@ -1,0 +1,11 @@
+string>if 1:
+	rr = renderSlug(Manifest(_clojure.test_tree_2), 0, 0)
+	canvas.lines().clear()
+	for r in rr[0]:
+		r += Vector2(-rr[1].w / 2, -rr[1].h / 2)
+		canvas.lines().add(r)
+
+
+if 0:
+	canvas.lines().clear()
+	canvas.lines().add(FLine(thickness=1, pointed=1, pointSize=10, color=Color4(1, 1, 1, 0.5)).rect(0, 0, 100, 200))
