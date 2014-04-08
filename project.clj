@@ -1,4 +1,4 @@
-(def LAYOUTS {:PREVIEW {:x 500 :y 50 :w 800 :h 600}})
+(def LAYOUTS {:PREVIEW {:x (- 1680 800 10) :y 50 :w 800 :h 600}})
 
 (defn screen [tag] (reduce #(str %1 "." %2)
                            (map #(% (tag LAYOUTS)) [:x :y :w :h])))

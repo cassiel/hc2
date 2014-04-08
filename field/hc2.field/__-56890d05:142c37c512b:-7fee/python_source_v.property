@@ -4,10 +4,13 @@ string>#--{1. Clojure}
 
 (ns user
 	(:require
-		(eu.cassiel.hc2 [main :refer :all])
-		(clojure.tools.namespace [repl :refer [refresh]])))
+		(clojure.tools.namespace [repl :as nr])))
 
-(refresh)
+(nr/refresh)
+
+(def tt eu.cassiel.hc2.main/test_tree_2)
 
 """, globals())
 #--{\\1. Clojure}
+
+_clojure.tt

@@ -2,7 +2,9 @@ string>#--{1. Clojure}
 Clojure(OKeyByName("Component_transformBlockStart:-3fe690cb:142de4649fc:-7fe5.transient", None), r"""
 
 
-(require '(clojure.tools.nrepl [server :as server]))
+(ns user
+	(:require
+		(clojure.tools.nrepl [server :as server])))
 
 (defn nrepl_start [port] (server/start-server :port port))
 

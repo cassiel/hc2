@@ -1,5 +1,7 @@
-string>if 1:
-	rr = renderSlug(Manifest(_clojure.test_tree_2), 0, 0)
+string>_self.find[VEs.CLOJUREINTEROP]()
+
+if 1:
+	rr = renderSlug(Manifest(_clojure.tt), 0, 0)
 	canvas.lines().clear()
 	for r in rr[0]:
 		r += Vector2(-rr[1].w / 2, -rr[1].h / 2)
