@@ -1,3 +1,4 @@
 string>_self.python_globals_.declare(_self, "VEs")
 _self.python_globals_.declare(_self, "Manifest")
 _self.python_globals_.declare(_self, "PHASES")
+_self.python_globals_.declare(_self, "CONFIG")

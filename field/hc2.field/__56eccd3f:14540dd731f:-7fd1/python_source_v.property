@@ -1,16 +1,16 @@
 string>def clear():
 	canvas.lines().clear()
 
-def bigCentre(text):
+def bigCentre(text, r=0, xm=1, ym=1):
 	line = FLine(color=Color4(1, 1, 1, 0.8), filled=True)\
-		.appendVectorText2(text, 0, 0, font="Optima", size=20)
+		.appendVectorText2(text, 0, 0, font="Optima", size=100)
 
 	lo, hi = line.bounds()
 	mid_X = (hi[0] - lo[0]) / 2
 	mid_Y = (hi[1] - lo[1]) / 2
-	line += Vector3(-mid_X, +mid_Y, 0)
+	line += Vector3(-mid_X * xm, +mid_Y * ym, 0)
 
-	line += CFrame(r=Math.PI/4)
+	line += CFrame(r=Math.PI * 2 * r)
 
 	ll = canvas.lines()
 	ll.add(line)

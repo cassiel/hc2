@@ -1,14 +1,21 @@
 string>#line = FLine().moveTo(-100,0,100).lineTo(100,0,100)(color=Color4(1,0,0,0.5))
 
-clear()
-bigCentre("B")
+if 0:
+	clear()
+	bigCentre("B", xm=10)
 
-clear()
-bigCentre("ONE TWO")
+if 0:
+	clear()
+	bigCentre("ONE TWO", r=0.25, xm=1)
 
 if 1:
-	d = 50
-	ll = FLine(color=Vector4(1, 1, 1, 1))
-	ll.moveTo(-d, -d).relLineTo(d, 0).relLineTo(0, d).lineTo(-d, -d)
+	d = 200
+	ll = FLine(color=Vector4(1, 0, 0, 0.8), pointed=1, pointSize=5, thickness=2, filled=1)
+	ll.moveTo(-d, -d).relLineTo(d * 2, 0).relLineTo(0, d * 2).lineTo(-d, -d)
 	canvas.lines().clear()
+	canvas.lines().add(ll)
+
+	d = 300
+	ll = FLine(color=Vector4(1, 1, 1, 1), pointed=1, pointSize=5, thickness=2, filled=0)
+	ll.rect(-d, -d, d * 2, d * 2)
 	canvas.lines().add(ll)
