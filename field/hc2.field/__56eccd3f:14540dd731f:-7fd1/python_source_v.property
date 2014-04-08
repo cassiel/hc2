@@ -20,11 +20,10 @@ def centreText(text):
 	clear()
 	doText(text)
 
-def text3(top, mid, bot, r=0, col=[1, 1, 1]):
-	clear()
-	doText(top, ym=-4, r=r, col=col)
-	doText(mid, r=r, col=col)
-	doText(bot, ym=7, r=r, col=col)
+def text3(top, mid, bot, r=0, col=[1, 1, 1], xm=1):
+	doText(top, xm=xm, ym=-4, r=r, col=col)
+	doText(mid, xm=xm, r=r, col=col)
+	doText(bot, xm=xm, ym=7, r=r, col=col)
 
 # Actions
 actions = ["Throw", "Slide", "Melt", "Jab", "Expand", "Float", "Whisk"]
@@ -37,5 +36,5 @@ parts = ["Leg", "Arm", "Spine", "Knees", "Shoulders", "Foot", "Hand", "Hip", "He
 
 import random
 
-def randText(col=[1, 1, 1]):
-	text3(random.choice(parts), random.choice(actions), random.choice(qualities), col=col)
+def randText(col=[1, 1, 1], xm=1, r=0):
+	text3(random.choice(parts), random.choice(actions), random.choice(qualities), xm=xm, col=col, r=r)

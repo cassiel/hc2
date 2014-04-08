@@ -25,6 +25,10 @@ cols = [[1, 1, 1], [1, 0.7, 0]]
 choice = 0
 
 choice = 1 - choice
-randText(col=cols[choice])
+
+clear()
+r = random.random()
+randText(col=cols[0], xm=-1, r=r)
+randText(col=cols[1], xm=3, r=r)
 
 clear()
