@@ -4,4 +4,11 @@ clear()
 bigCentre("B")
 
 clear()
-bigCentre("XXXX")
+bigCentre("ONE TWO")
+
+if 1:
+	d = 50
+	ll = FLine(color=Vector4(1, 1, 1, 1))
+	ll.moveTo(-d, -d).relLineTo(d, 0).relLineTo(0, d).lineTo(-d, -d)
+	canvas.lines().clear()
+	canvas.lines().add(ll)

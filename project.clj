@@ -19,5 +19,5 @@
                     :editorFont "Courier"
                     :editorFontSize 12
                     :editorTabSize 4
-                    :rect ~(screen :PREVIEW)
+                    ;; :rect ~(screen :PREVIEW)
                     :field.scratch "hc2.field"})

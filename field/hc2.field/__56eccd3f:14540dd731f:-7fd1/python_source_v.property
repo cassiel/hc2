@@ -10,5 +10,7 @@ def bigCentre(text):
 	mid_Y = (hi[1] - lo[1]) / 2
 	line += Vector3(-mid_X, +mid_Y, 0)
 
+	line += CFrame(r=Math.PI/4)
+
 	ll = canvas.lines()
 	ll.add(line)
