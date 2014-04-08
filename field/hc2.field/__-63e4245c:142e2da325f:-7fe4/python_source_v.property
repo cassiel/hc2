@@ -1,0 +1,20 @@
+string># Functions only: we don't actually start this as a VE.
+
+from field.graphics.core import SaverOnscreen
+from java.text import SimpleDateFormat
+
+class JPEGPrinter:
+	def __init__(self, canvas, prefix):
+		self.__canvas = canvas
+
+		dd = SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(Date())
+		fullPrefix = File(prefix, dd)
+		fullPrefix.mkdirs()
+		self.__saver = SaverOnscreen(canvas.width(), canvas.height(), 2, fullPrefix.toString() + "/")
+
+	def start(self):
+		self.__saver.join(self.__canvas)
+		self.__saver.start()
+
+	def stop(self):
+		self.__saver.stop()

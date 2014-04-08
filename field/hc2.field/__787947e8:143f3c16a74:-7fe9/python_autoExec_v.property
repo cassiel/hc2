@@ -1,0 +1,10 @@
+string>@overridePaint
+def customPaint(source, bounds, visible):
+        colour = source.tintColour or Color4(1.0, 1.0, 1.0, 0.5)
+        line = PLine().rect(bounds)
+        tr = [1.0, source.globalOpacity][source.globalOpacity!=None]
+        line(filled=1,
+             fillColor=Vector4(colour.x, colour.y, colour.z, colour.w*tr),
+             thickness=0.5,
+             stroked=False)     
+        paintPLineNow(line)

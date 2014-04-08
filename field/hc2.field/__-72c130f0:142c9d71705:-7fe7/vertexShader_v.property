@@ -1,0 +1,20 @@
+string>varying vec4 tex;
+
+attribute vec4 s_Color;
+
+attribute vec4 s_Texture;
+
+// [size, fill-amount, -, -]
+attribute vec4 s_Five;
+
+varying vec4 vertexColor;
+
+varying float fillAmount;
+
+void main()
+{
+    	gl_Position = gl_ModelViewProjectionMatrix * (gl_Vertex+vec4(s_Texture.x-0.5, s_Texture.y-0.5, 0.0, 0.0)*2.0*s_Five.x);
+    	tex.xy = s_Texture.xy;
+    	vertexColor = s_Color;
+	fillAmount = s_Five.y;
+}

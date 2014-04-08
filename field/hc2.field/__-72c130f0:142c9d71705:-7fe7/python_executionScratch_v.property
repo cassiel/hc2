@@ -1,0 +1,16 @@
+string>for x in floatRange(-1, 1, 100): print x
+
+canvas << Clear(Vector3(0.5, 0.5, 0.5))
+
+
+thickShader | quads
+
+
+canvas | thickShader
+
+
+
+canvas.getCamera().setPosition(Vector3(200, -250, 200))
+canvas.getCamera().setLookAt(Vector3(0, 0, 0))
+
+_self.tintColour = Color4(0.3, 0.3, 0.3, 0.5)

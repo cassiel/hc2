@@ -1,0 +1,9 @@
+string>
+_self.python_globals_.declare(_self, "disc")
+_self.python_globals_.declare(_self, "AUX")
+_self.python_globals_.declare(_self, "triangle")
+_self.python_globals_.declare(_self, "square")
+_self.python_globals_.declare(_self, "text")
+_self.python_globals_.declare(_self, "textit")
+_self.python_globals_.declare(_self, "xline")
+_self.python_globals_.declare(_self, "b")

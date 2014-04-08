@@ -1,0 +1,12 @@
+string>#--{1. Clojure}
+Clojure(OKeyByName("Component_transformBlockStart:3fe07c57:142bd2deb6a:-7ff4.transient", None), r"""
+
+
+(ns user
+	(:require (eu.cassiel.hc2 [main :refer :all])
+	:reload-all))
+
+(def BG_COLOUR [0 0 0])
+
+""", globals())
+#--{\\1. Clojure}

@@ -1,0 +1,8 @@
+string>if 1:
+	_self.shader_ = makeShaderFromElement(_self)
+	canvas << _self.shader_
+
+	_self.mesh_ = meshContainer()
+	_self.shader_ << _self.mesh_
+
+g_TriMesh = _self.mesh_

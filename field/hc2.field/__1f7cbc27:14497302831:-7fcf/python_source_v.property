@@ -1,0 +1,33 @@
+string>def start():
+	_self.last_ = 0L
+	label_NW(_self, "RUNNING")
+
+def doit_OLD():
+	now = System.currentTimeMillis()
+	if now > _self.last_.longValue() + 100:
+		lag = now - _self.last_.longValue()
+		c = canvas.getCamera()
+		x, y, z = c.getPosition()
+		z = z + 5
+		c.setPosition(Vector3(x, y, z))
+		c.setLookAt(Vector3(x, y, z + 1001))
+
+		main = _self.find[VEs.MAIN][0]
+		main.state_ = _clojure.camera_to(main.state_, (x, y, z))
+
+		_self.last_ = _self.last_.longValue() + 100L
+
+def doit():
+	main = _self.find[VEs.MAIN][0]
+	state, cam = _clojure.update_camera(main.state_)
+	main.state_ = state
+	if cam:
+		cam = Manifest(cam)
+		c = canvas.getCamera()
+		c.setPosition(Vector3(*cam.position))
+		c.setLookAt(Vector3(*cam.look_at))
+
+def done():
+	label_NW(_self)
+
+_r = (start, doit, stop)

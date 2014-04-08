@@ -1,0 +1,69 @@
+string>'''
+Various utility functions for setting presentation parameters, according to
+visual elements' roles.
+
+(Most of these are lifted from the CLA.)
+'''
+
+from field.core.ui import PresentationParameters
+
+def presentation_NailedInPlace(ve):
+	ve.present = PresentationParameters(fixedHeight=True,
+					    fixedWidth=True,
+					    fixedPosition=True,
+					    hidden=False
+					   )
+
+def presentation_GrammarElement(ve):
+	ve.present = PresentationParameters(fixedHeight=True,
+							  rightClickBecomesSpace=True
+							 )
+
+def presentation_Impotent(ve):
+	ve.present = PresentationParameters(fixedHeight=True,
+							  fixedWidth=True,
+							  fixedPosition=True,
+							  clickBecomesOptionClick=False,
+							  rightClickBecomesSpace=False,
+							  notSelectable=True
+							 )
+
+def presentation_PopupMenuButton(ve):
+	''' The coloured buttons: their only UI is the right-click menu. '''
+	ve.present = PresentationParameters(fixedHeight=True,
+							  fixedWidth=True,
+							  fixedPosition=True,
+							  clickBecomesOptionClick=False,
+							  rightClickBecomesSpace=True,
+							  notSelectable=True
+							 )
+
+def presentation_PlainClickableButton(ve):
+	''' The button VEs with arrows - they take a simple click (and maybe right click). '''
+	ve.present = PresentationParameters(fixedHeight=True,
+							  fixedWidth=True,
+							  fixedPosition=True,
+							  clickBecomesOptionClick=True,
+							  rightClickBecomesSpace=True,
+							  notSelectable=True
+							 )
+
+def presentation_InternalElement(ve):
+	''' Not visible or active in presentation. '''
+	ve.present = PresentationParameters(hidden=True)
+
+def presentation_DraggableThumbnail(ve):
+	''' Fixed size, can be dragged around. Also: right-click menu (for future expansion).'''
+	ve.present = PresentationParameters(fixedHeight=True,
+							  fixedWidth=True,
+							  rightClickBecomesSpace=True
+							 )
+
+def presentation_FixedFurniture(ve):
+	''' Things like the playback control and time markers. '''
+	ve.present = PresentationParameters(fixedHeight=True,
+							  fixedWidth=True,
+							  fixedPosition=True,
+							  rightClickBecomesSpace=True,
+							  notSelectable=True
+							 )

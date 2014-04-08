@@ -1,0 +1,17 @@
+string>canvas = makeFullscreenCanvas()
+
+canvas << Clear(Vector3(*BG_COLOUR))
+
+canvas.getCamera().setPosition(Vector3(0, 0, -2000))
+canvas.getCamera().setLookAt(Vector3(0, 0, 0))
+canvas.getCamera().setUp(Vector3(0, -1, 0))
+
+_self.shader_ = makeShaderFromElement(_self)
+canvas << _self.shader_
+
+_self.mesh_ = pointContainerWithQuads()
+_self.shader_ << _self.mesh_
+
+_self.shader_ << DisableDepthTest()
+
+g_DiscMesh = _self.mesh_

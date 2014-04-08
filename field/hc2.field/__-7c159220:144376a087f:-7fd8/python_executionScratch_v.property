@@ -1,0 +1,44 @@
+string>main = _self.find[VEs.MAIN][0]
+
+for i in range(3):
+	main.state_ = _clojure.flash(main.state_, "v.in", main.counter_, 20, i, [1, 1, 0, 1])
+
+main.state_ = _clojure.flash(main.state_, "v.in", main.counter_, 20, 0, [1, 1, 0, 1])
+
+for i in range(3):
+	main.state_ = _clojure.flash(main.state_, "v.point", main.counter_, 120, i, [1, 1, 1, 1])
+	main.state_ = _clojure.flash(main.state_, "fill", main.counter_, 120, i, 0.5)
+
+main.state_ = _clojure.flash(main.state_, "v.in", main.counter_, 120, 1, [1, 0, 0, 0.7])
+main.state_ = _clojure.flash(main.state_, "v.out", main.counter_, 120, 1, [1, 1, 1, 0.3])
+
+
+main.state_ = _clojure.seek(main.state_, "delta", main.counter_, 200, 1, 0.1)
+main.state_ = _clojure.seek(main.state_, "spread", main.counter_, 200, 1, 1)
+main.state_ = _clojure.seek(main.state_, "v.point", main.counter_, 300, 2, [1, 1, 1, 0.5])
+main.state_ = _clojure.seek(main.state_, "fill", main.counter_, 120, 2, 1)
+main.state_ = _clojure.seek(main.state_, "radius", main.counter_, 120, 0, 1)
+main.state_ = _clojure.seek(main.state_, "length", main.counter_, 120, 1, 1)
+
+main.state_ = _clojure.seek(main.state_, "v.outline", main.counter_, 120, 0, 1)
+
+# Aspect ratio test:
+
+main.state_ = _clojure.seek(main.state_, "v.point", main.counter_, 300, 0, [1, 1, 1, 0.5])
+main.state_ = _clojure.seek(main.state_, "radius", main.counter_, 120, 0, 1)
+main.state_ = _clojure.seek(main.state_, "length", main.counter_, 120, 0, 1)
+main.state_ = _clojure.seek(main.state_, "v.outline", main.counter_, 120, 0, 0.8)
+main.state_ = _clojure.seek(main.state_, "spread", main.counter_, 200, 0, 1)
+
+# end.
+
+main.state_ = _clojure.seek(main.state_, "radius", main.counter_, 120, 0, 1)
+
+
+
+main.state_[0]
+
+_clojure.seek(main.state_, "v.point", main.counter_, 200, 0, [1, 1, 1, 1])[0]
+
+
+main.state_ = _clojure.flash(main.state_, "v.in", main.counter_, 120, i, 0.3)

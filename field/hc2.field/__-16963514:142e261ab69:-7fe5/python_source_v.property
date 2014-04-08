@@ -1,0 +1,19 @@
+string>def label(ve, lab, y):
+        if lab is None:
+                return None
+        else:
+                f = FLine()
+                f.appendVectorText2(lab, 3, y, font="Courier", size=11)
+                f(offsetFromSource=Vector2(0, 1))
+                f(filled=1, color=Vector4(0, 0, 0, 0.2))
+                return f
+
+def label_NW(ve, lab=None):
+        ve.decoration_NW_ = label(ve, lab, -15)
+
+def label_SW(ve, lab=None):
+        ve.decoration_SW_ = label(ve, lab, -4)
+
+def labels(ve, nw=None, sw=None, ne=None, se=None):
+        label_NW(ve, nw)
+        label_SW(ve, sw)

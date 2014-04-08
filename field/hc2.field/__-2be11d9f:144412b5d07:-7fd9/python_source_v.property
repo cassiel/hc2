@@ -1,0 +1,25 @@
+string># requires canvas.
+
+def setup():
+	_self.lastReport_ = 0L
+	_self.lastFrame_ = canvas.getFrameNumber()
+
+def tick():
+	now = System.currentTimeMillis()
+	delta = now - _self.lastReport_.longValue()
+	if delta > 1000:
+		fr = canvas.getFrameNumber()
+		legend = "fps %.1f" % (1000 * (fr - _self.lastFrame_) / (delta + 0.0))
+		label_NW(_self, legend)
+		freeMem = Runtime().freeMemory()
+		maxMem = Runtime().maxMemory()
+		legend = "mem %2.0f%%" % ((maxMem - freeMem) * 100 / maxMem)
+		label_SW(_self, legend)
+		_self.dirty = 1		# Force refresh.
+		_self.lastReport_ = now
+		_self.lastFrame_ = fr
+
+def clear():
+	labels(_self)
+
+_r = (setup, tick, clear)

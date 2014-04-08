@@ -1,0 +1,77 @@
+string>"""
+Print simple labels showing the state of the main scripts
+for every VE on the sheet.
+
+ABSENT - no script present
+WHITESPACE - present, but only whitespace or comments
+AUTODECLARE - present, only auto-declaring stuff
+PRESENT - present, contains other (more significant) code
+
+Our property testing is currently not checking for and
+marking whether properties are inherited - that's a to-do.
+"""
+
+from NewCachedLines import FLine
+
+class EnumerateProps:
+        def __init__(self, names):
+                for number, name in enumerate(names.split()):
+                        setattr(self, name, number)
+
+# Props are ordered by degree of "importance":
+
+Props = EnumerateProps('ABSENT WHITESPACE AUTODECLARE CODE')
+
+SCRIPT_COLOURS = [
+        None,
+        Vector4(1, 1, 1, 0.2),          # WHITESPACE
+        Vector4(1, 1, 0, 1),            # AUTODECLARE
+        Vector4(0, 0, 0, 1)             # CODE (with other text)
+]
+
+def testProp(prop):
+        import re
+
+        if prop is not None:
+                state = Props.WHITESPACE
+
+                lines = prop.splitlines()
+                for l in lines:
+                        if re.match('^\s*(#.*)?$', l):
+                                state = max(state, Props.WHITESPACE)
+                        elif re.match('^\s*_self\.python_globals_\.declare\(', l):
+                                state = max(state, Props.AUTODECLARE)
+                        else:
+                                state = max(state, Props.CODE)
+
+                return state
+        else:
+                return Props.ABSENT
+
+def annotateScripts(ve):
+        offset = 5
+        ve.decoration_scriptLabels = []
+        for lab, prop in [
+                ("A", ve.python_autoExec_v),
+                ("D", ve.python_source_v),
+                ("S", ve.python_executionScratch_v),
+                ("v", ve.vertexShader_v),
+                ("g", ve.geometryShader_v),
+                ("f", ve.fragmentShader_v)
+        ]:
+                state = testProp(prop)
+                if state != Props.ABSENT:
+                        colour = SCRIPT_COLOURS[state]
+                        labelScript(ve, offset, lab, colour)
+                        offset = offset + 10
+
+def labelScript(ve, offset, lab, colour):
+        f = FLine()
+        f.appendVectorText2(lab, offset, 0, font="Courier", size=15)
+        f(color=colour)
+        f(offsetFromSource=Vector2(1, 1))
+        f(filled=1)
+        ve.decoration_scriptLabels.append(f)
+
+for ve in _self.find[".*"]:
+        annotateScripts(ve)

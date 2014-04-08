@@ -1,0 +1,5 @@
+string>
+_self.python_globals_.declare(_self, "label_NW")
+_self.python_globals_.declare(_self, "label")
+_self.python_globals_.declare(_self, "label_SW")
+_self.python_globals_.declare(_self, "labels")

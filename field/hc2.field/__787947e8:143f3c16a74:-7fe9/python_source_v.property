@@ -1,0 +1,21 @@
+string># Align children.
+
+top = 50
+for c in [_self] +_self.subelements:
+	width = c.preferredWidth or 200
+
+	if c.in_play:
+		x = 200
+	else:
+		x = 50
+
+	c.frame.setX(x)
+	c.frame.setY(top)
+	c.frame.setW(width)
+	c.frame.setH(25)
+	top = top + 30
+
+# Nothing is draggable!
+
+for c in _self.find[".*"]:
+	presentation_NailedInPlace(c)

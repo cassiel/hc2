@@ -1,0 +1,47 @@
+string>p = JPEGPrinter(canvas, "/Users/nick/Desktop/MMU")
+
+p.start()
+p.stop()
+
+
+Interop.fade_in_rand(0).ROWS[0].COLS[0].RAW
+
+Interop.fade_in_rand_OLD(0)
+
+Interop.BG_COLOUR
+
+_self.tintColour = Color4(1.0, 0.5, 0.2, 0.3)
+
+2.5 % 1.0
+
+_self.state_
+
+
+
+_self.state_ = _clojure.bang(_self.state_, _self.counter_)
+
+ss = _clojure.init()
+ss
+ss = _clojure.step(ss, 1)
+
+_clojure.render(ss)
+mm = Manifest(_clojure.render(ss))
+
+mm.tris
+
+for p in mm.points:
+	print p.fill
+
+Manifest(_clojure.render(ss)).points[0].rgba
+
+_self.counter_
+
+_self.state_ = _clojure.bang(_self.state_, _self.counter_)
+
+ss = _self.state_
+
+###
+
+_self.printer_ = JPEGPrinter(canvas, "/Users/nick/Desktop/IJAD")
+_self.printer_.start()
+_self.printer_.stop()

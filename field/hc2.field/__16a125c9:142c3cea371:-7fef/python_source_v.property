@@ -1,0 +1,34 @@
+string>from java.util import Map, List
+
+class Manifest:
+        def __init__(self, h=None, **kw):
+                for k in kw:
+                        setattr(self, k, kw[k])
+
+                if h is not None:
+                        for k in h.iterator():
+                                n = k.getKey().getName()
+                                v = k.getValue()
+                                setattr(self, n, self.__unpack(v))
+
+        def __unpack(self, x):
+                if isinstance(x, Map):
+                        return Manifest(x)
+                elif isinstance(x, List):
+                        return map(self.__unpack, x)
+                else:
+                        return x
+
+VEs = Manifest(CLOJUREINTEROP="m_ClojureInterop",
+			   OSCIN="m_OSC In",
+			   CUES_FROM_OSC="Cues from OSC",
+			   HELLO_DOLLY="Hello Dolly",
+			   ANNOTATION="Annotation",
+			   HAL="HAL",
+			   MAIN="MAIN")
+
+PHASES = Manifest(PERSONAL="PERSONAL",
+				  BIGBANG="BIGBANG",
+				  GRAVITY="GRAVITY",
+				  UNIVERSE="UNIVERSE",
+				  DREAM="DREAM")
