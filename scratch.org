@@ -1,0 +1,16 @@
+-*- mode: org; mode: visual-line; -*-
+#+STARTUP: indent
+
+* SCRATCH
+** Animation tests
+
+#+BEGIN_SRC clojure
+  (ns user (:require (eu.cassiel.hc2 [animo :as a])))
+
+  (as-> a/initial-state
+        S
+        (a/cue-anim S a/null-anim 10 1000)
+        (a/set-start-times S)
+        (assoc S :time 1020)
+        (a/render-anims S))
+#+END_SRC
