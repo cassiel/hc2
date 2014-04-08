@@ -28,9 +28,3 @@ VEs = Manifest(CLOJUREINTEROP="m_ClojureInterop",
 			   ANNOTATION="Annotation",
 			   HAL="HAL",
 			   MAIN="MAIN")
-
-PHASES = Manifest(PERSONAL="PERSONAL",
-				  BIGBANG="BIGBANG",
-				  GRAVITY="GRAVITY",
-				  UNIVERSE="UNIVERSE",
-				  DREAM="DREAM")
