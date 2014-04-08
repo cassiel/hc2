@@ -8,3 +8,5 @@ string>#--{1. Clojure}
 
 """, globals())
 #--{\\1. Clojure}
+
+_clojure.test_tree

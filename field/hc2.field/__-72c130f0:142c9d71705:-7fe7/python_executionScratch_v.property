@@ -14,3 +14,5 @@ canvas.getCamera().setPosition(Vector3(200, -250, 200))
 canvas.getCamera().setLookAt(Vector3(0, 0, 0))
 
 _self.tintColour = Color4(0.3, 0.3, 0.3, 0.5)
+
+_self.in_play = True
