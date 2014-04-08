@@ -19,6 +19,8 @@ class Manifest:
                 else:
                         return x
 
+CONFIG = Manifest(BG_COLOUR=Vector3(0, 0, 0))
+
 VEs = Manifest(CLOJUREINTEROP="m_ClojureInterop",
 			   OSCIN="m_OSC In",
 			   CUES_FROM_OSC="Cues from OSC",

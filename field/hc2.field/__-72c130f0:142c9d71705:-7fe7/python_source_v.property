@@ -1,6 +1,6 @@
 string>canvas = makeFullscreenCanvas()
 
-canvas << Clear(Vector3(*BG_COLOUR))
+canvas << Clear(CONFIG.BG_COLOUR)
 
 canvas.getCamera().setPosition(Vector3(0, 0, -2000))
 canvas.getCamera().setLookAt(Vector3(0, 0, 0))
