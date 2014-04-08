@@ -1,4 +1,4 @@
-(def LAYOUTS {:PREVIEW {:x 20 :y 20 :w 800 :h 600}})
+(def LAYOUTS {:PREVIEW {:x 500 :y 50 :w 800 :h 600}})
 
 (defn screen [tag] (reduce #(str %1 "." %2)
                            (map #(% (tag LAYOUTS)) [:x :y :w :h])))
@@ -19,5 +19,5 @@
                     :editorFont "Courier"
                     :editorFontSize 12
                     :editorTabSize 4
-                    ;; :rect ~(screen :PREVIEW)
+                    :rect ~(screen :PREVIEW)
                     :field.scratch "hc2.field"})

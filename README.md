@@ -34,7 +34,32 @@ TODO: Brief description
 TODO
 
 
+## Animation ideas
 
+- Appear/vanish (possibly with overall fades)
+- Translation movement (centre X, Y)
+- Rotate individual units about centre
+- Staggered fading (text)
+- Bracket animation (growth, colour change, ...)
+- Parent/children: child rotation (circular fiducials)
+- Text size
+- Text font, style
+- Text scrolling
+- Children insert/delete ("DOM manipulation")
+
+## Tags
+
+- Numeric (speed, repeat times, select)
+
+        `* 3`
+        `[3]`
+        `^ 3`
+        
+- Orientation
+
+        `RIGHT`
+        `POINT`, `AREA`, ...
+        
 ## Change Log
 
 * Version 0.1.0-SNAPSHOT

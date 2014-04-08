@@ -3,8 +3,11 @@ string>#--{1. Clojure}
 
 
 (ns user
-	(:require (eu.cassiel.hc2 [main :refer :all])
-	:reload-all))
+	(:require
+		(eu.cassiel.hc2 [main :refer :all])
+		(clojure.tools.namespace [repl :refer [refresh]])))
+
+(refresh)
 
 """, globals())
 #--{\\1. Clojure}
