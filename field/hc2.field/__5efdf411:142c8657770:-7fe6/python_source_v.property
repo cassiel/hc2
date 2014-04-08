@@ -1,0 +1,36 @@
+string>if not _self.mesh_:
+	ve = _self.find[VEs.DISCSHADER][0]
+	ve()
+	s = ve.shader_
+
+	m = pointContainerWithQuads()
+	s << m
+
+	_self.mesh_ = m
+
+m = _self.mesh_
+
+with m:
+	for x in floatRange(-500, 500, 1000):
+        	for y in floatRange(-500, 500, 1000):
+            		v = m.nextVertex(x,y,0)
+            		m.setAux(v, 5, 2)
+
+qm = QuadMesh_long(StandardPass.render)
+qm.rebuildTriangle(0)
+qm.rebuildVertex(0)
+points = DynamicPointlist_quad(qm)
+
+ve.shader_ << points
+ve.shader_ << DisableDepthTest()
+
+ve.shader_.dimensions = Vector4(canvas.width(), canvas.height(), 0, 0)
+
+with points: pass
+
+with points:
+	for n in range(0, 4000):
+		b = points.nextVertex(Vector3(0,0,0).noise(100))
+		pointSize = 1*Math.random()
+		points.setAux(b, 5, pointSize, 0, 0, 0)
+		points.setAux(b, _color, 1,Math.random(),0,0.5)

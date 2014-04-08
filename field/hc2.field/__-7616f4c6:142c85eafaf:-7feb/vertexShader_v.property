@@ -1,0 +1,29 @@
+string>
+attribute vec4 s_Color;
+
+// s_Texture contains the texture coords for the point sprite, 0, 0, -> 1, 1
+attribute vec4 s_Texture;
+
+// we'll use s_Five.x for point size and leave the other for "future expansion"
+attribute vec4 s_Five;
+
+// I keep declaring things vec4 even when I only use, say, vec2 of them because I'm lazy
+// I never know when I'll need another float of information
+uniform vec4 dimensions;
+uniform vec4 cameraPosition;
+
+
+// sent to the fragment shader
+varying vec4 vertexColor;
+varying vec4 texture;
+
+void main()
+{
+	vec4 offset = vec4(s_Texture.x-0.5,s_Texture.y-0.5, 0, 0)*s_Five.x;
+	gl_Position = gl_ModelViewProjectionMatrix * (gl_Vertex+offset);
+	vertexColor = s_Color;
+	texture = s_Texture;
+
+	texture.z = length(gl_Vertex.xyz-cameraPosition.xyz) / (s_Five.x);
+
+}

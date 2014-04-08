@@ -1,0 +1,8 @@
+string>main = _self.find[VEs.MAIN][0]
+
+def fg_rgb((r, g, b), msec):
+	state = main.state_
+	state = _clojure.automate(state, "R", r, msec)
+	state = _clojure.automate(state, "G", g, msec)
+	state = _clojure.automate(state, "B", b, msec)
+	main.state_ = state

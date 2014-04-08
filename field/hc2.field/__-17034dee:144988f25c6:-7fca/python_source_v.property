@@ -1,0 +1,57 @@
+string>def phase():
+	return _self.find[VEs.CUES_FROM_OSC][0].PHASE_ or "PERSONAL"
+
+def oblong():
+	print "OBLONG"
+	main.state_ = _clojure.oblong(main.state_, phase(), 0, 0)
+
+def chaff():
+	print "CHAFF"
+	main.state_ = _clojure.chaff(main.state_, phase())
+
+def chaff2():
+	print "CHAFF2"
+	main.state_ = _clojure.chaff2(main.state_, phase())
+
+def generic_hal():
+	print "HAL"
+	main.state_ = _clojure.generic_hal(main.state_, phase())
+
+FNS = {
+	PHASES.PERSONAL : [],
+	PHASES.BIGBANG  : [oblong],
+	PHASES.GRAVITY  : [oblong, chaff],
+	PHASES.UNIVERSE : [oblong, chaff, chaff2, generic_hal],
+	PHASES.DREAM    : [oblong, chaff, chaff, chaff2, generic_hal, generic_hal, generic_hal, generic_hal]
+}
+
+INTERVAL = {
+	PHASES.PERSONAL : 40,
+	PHASES.BIGBANG  : 40,
+	PHASES.GRAVITY  : 30,
+	PHASES.UNIVERSE : 20,
+	PHASES.DREAM    : 20
+}
+
+from random import choice
+
+def launch_hal():
+	fns = FNS[phase()]
+	if len(fns) > 0:
+		f = choice(fns)
+		f()
+
+def start():
+	_self.last_ = 0L
+	label_NW(_self, "RUNNING")
+
+def doit():
+	now = System.currentTimeMillis()
+	if now > _self.last_.longValue() + (INTERVAL[phase()] * 1000):
+		launch_hal()
+		_self.last_ = now
+
+def done():
+	label_NW(_self)
+
+_r = (start, doit, done)

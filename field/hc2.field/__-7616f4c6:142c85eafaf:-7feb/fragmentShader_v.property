@@ -1,0 +1,24 @@
+string>varying vec4 vertexColor;
+varying vec4 texture;
+
+
+
+void main()
+{
+
+	float r = length(texture.xy-vec2(0.5, 0.5))/0.5;
+
+	float delta = 0.003*texture.z;
+
+	r = (delta-abs(r-0.8))/delta;
+
+	r = max(0.0, min(1.0, r));
+
+	if (r<0.01)
+		discard;
+
+	gl_FragColor = vertexColor*r;
+	//gl_FragColor.w = vertexColor.w;
+
+
+}

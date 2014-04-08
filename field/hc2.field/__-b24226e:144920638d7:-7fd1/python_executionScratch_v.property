@@ -1,0 +1,51 @@
+string># Before second wind in clicky funk (walk around space backwards):
+_self.PHASE_ = PHASES.PERSONAL
+
+# Steampunk beat:
+_self.PHASE_ = PHASES.BIGBANG
+
+# Thuddy ambience:
+_self.PHASE_ = PHASES.GRAVITY
+
+# Nyman:
+_self.PHASE_ = PHASES.UNIVERSE
+
+# Piano:
+_self.PHASE_ = PHASES.DREAM
+
+
+_self.PHASE_
+
+bang(_self.PHASE_)
+
+
+
+
+bang(PHASES.PERSONAL)
+bang(PHASES.BIGBANG)
+bang(PHASES.GRAVITY)
+bang(PHASES.UNIVERSE)
+bang(PHASES.DREAM)
+
+clear(PHASES.BIGBANG)
+
+
+Manifest(main.state_[0]).tweets.PERSONAL
+Manifest(main.state_[0]).tweets.BIGBANG
+Manifest(main.state_[0]).tweets.GRAVITY
+Manifest(main.state_[0]).tweets.UNIVERSE
+Manifest(main.state_[0]).tweets.DREAM
+
+
+# Photo opportunity.
+main = _self.find[VEs.MAIN][0]
+
+main.state_ = _clojure.add_tweets(
+					main.state_, 
+					PHASES.GRAVITY,
+					[["The imagination of nature is far, far greater than the imagination of man. - Feynman. @IJADdance #infinitereach"]])
+
+bang(PHASES.GRAVITY)
+main.state_ = _clojure.oblong(main.state_, PHASES.GRAVITY, 0, 0)
+main.state_ = _clojure.chaff(main.state_, PHASES.GRAVITY)
+main.state_ = _clojure.generic_hal(main.state_, PHASES.GRAVITY)

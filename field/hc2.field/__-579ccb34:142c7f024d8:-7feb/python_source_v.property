@@ -1,0 +1,44 @@
+string>if not _self.mesh_:
+	ve = _self.find[VEs.TRISHADER][0]
+	ve()
+	s = ve.shader_
+
+	m = meshContainer()
+	s << m
+
+	_self.mesh_ = m
+
+m = _self.mesh_
+WHITE = Vector4(1, 1, 1, 1)
+GREY = Vector4(0.2, 0.2, 0.2, 1)
+BLUE = Vector4(0, 0, 1, 1)
+
+
+with m: pass
+
+ROWS = 58
+COLS = 60
+PITCH = 2
+
+X_OFFSET = -(PITCH * COLS / 2)
+Y_OFFSET = -(PITCH * ROWS / 2)
+
+def drawLayout(highlightX, highlightY):
+	with m:
+		for y in range(ROWS):
+			for x in range(COLS):
+				pos = [X_OFFSET + x * PITCH,
+				       Y_OFFSET + y * PITCH]
+				present = matrix[y][x]
+				c = [GREY, WHITE][present]
+				if [x, y] == [highlightX, highlightY]:
+					c = BLUE
+				doSquare(m, pos[0], pos[1], PITCH * 0.9, c)
+
+def genner():
+	for x in range(COLS):
+		for y in range(ROWS):
+			drawLayout(x, y)
+			yield 1
+
+_r = genner()

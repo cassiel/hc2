@@ -1,0 +1,4 @@
+string>ve = _self.find[VEs.DISCSHADER][0]
+ve.shader_ | _self.mesh_
+
+ve.shader_ << _self.mesh_

@@ -1,0 +1,31 @@
+string>_self.OSCIn(5500).dispatchOver(_self)
+
+# Address is /seek or /flash.
+# Args:
+#	0: fnname
+#	1: envelope time in frames (int)
+#	2: depth into template tree (int from 0)
+#	3: value (float, 0.0..1.0) - if the fname is v.* then the Clojure side
+#		converts this into an RGBA vector according to an internal table
+
+@_self.handleOSC_
+def myCallback(address, section, *text):
+	main = _self.find[VEs.MAIN][0]
+
+	if address == "/clear-tweets":
+		main.state_ = _clojure.clear_tweets(main.state_, section)
+	elif address == "/add-tweet":
+		print("/add-tweet SECTION: %s" % section)
+		print("TEXT: ", text)
+		main.state_ = _clojure.add_tweets(main.state_, section, [text])
+
+def start():
+	label_NW(_self, "RUNNING")
+
+def doOSCUpdate():
+	_self.OSCIn.update()
+
+def stop():
+	label_NW(_self)
+
+_r = (start, doOSCUpdate, stop)

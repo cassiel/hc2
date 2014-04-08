@@ -1,0 +1,18 @@
+string>main = _self.find[VEs.MAIN][0]
+
+
+
+main.state_ = _clojure.oblong(main.state_, _self.find[VEs.CUES_FROM_OSC][0].PHASE_, 0, 0)
+
+#main.state_ = _clojure.oblong(main.state_, _self.find[VEs.CUES_FROM_OSC][0].PHASE_, 0, 1)
+
+main.state_ = _clojure.oblong(main.state_, _self.find[VEs.CUES_FROM_OSC][0].PHASE_, 5, 1)
+
+main.state_ = _clojure.chaff(main.state_, _self.find[VEs.CUES_FROM_OSC][0].PHASE_)
+
+main.state_ = _clojure.chaff2(main.state_, _self.find[VEs.CUES_FROM_OSC][0].PHASE_)
+
+main.state_ = _clojure.generic_hal(main.state_, _self.find[VEs.CUES_FROM_OSC][0].PHASE_)
+
+
+_self.find[VEs.CUES_FROM_OSC][0].PHASE_

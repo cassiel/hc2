@@ -1,0 +1,14 @@
+string>def animate():
+    with quads:
+        for x in floatRange(-500, 500, 50):
+            for y in floatRange(-500, 500, 50):
+                v = quads.nextVertex(x, y, 0)
+                quads.setAux(v, 5, 5 + 10 * Math.random(), Math.random())
+		# Variable opacity:
+		#quads.setAux(v, _color, 0, 0, 0, Math.random())
+		quads.setAux(v, _color, 0, 0, 0, 0.5)
+
+_r = animate
+
+#pointSize = 10*Math.random()
+#points.setAux(b, 5, pointSize, 0, 0, 0)

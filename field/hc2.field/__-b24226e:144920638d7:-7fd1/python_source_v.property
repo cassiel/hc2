@@ -1,0 +1,32 @@
+string>def bang(section):
+	main = _self.find[VEs.MAIN][0]
+	main.state_ = _clojure.rgb_tweet(main.state_, section, 30000)
+
+def clear(section):
+	main = _self.find[VEs.MAIN][0]
+	main.state_ = _clojure.clear_tweets(main.state_, section)
+
+def loadup(cat, s):
+	main = _self.find[VEs.MAIN][0]
+	main.state_ = _clojure.add_tweets(main.state_, cat, [s.split(" ")])
+
+
+_self.PHASE_ = _self.PHASE_ or PHASES.PERSONAL
+
+def start():
+	_self.last_ = 0L
+	_self.PHASE_ = PHASES.PERSONAL
+	label_NW(_self, "RUNNING")
+
+def doit():
+	now = System.currentTimeMillis()
+	if now > _self.last_.longValue() + 40000:
+		print("> %s ..." % _self.PHASE_)
+		bang(_self.PHASE_)
+		_self.last_ = now
+
+def done():
+	label_NW(_self)
+
+_r = (start, doit, done)
+

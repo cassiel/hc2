@@ -1,0 +1,133 @@
+string>_self.tintColour = Color4(1, 0.2, 0, 0.1)
+
+
+ve = _self.find[VEs.MAIN][0]
+
+ve.state_ = _clojure.test_plate(ve.state_, 20000, "TWEET!")
+ve.state_
+
+ve.state_ = _clojure.automate(ve.state_, "R", 1.0, 10000)
+ve.state_ = _clojure.automate(ve.state_, "R", 0.0, 10000)
+
+_clojure.test_plate(ve.state_)
+
+ve.counter_ = ve.counter_ + 1
+ve.state_ = _clojure.step(ve.state_, ve.counter_)
+
+x = ve.state_
+
+
+
+x
+
+_clojure.step(x, 999)
+_clojure.step(_clojure.test_plate(x), 999)
+
+_clojure.test_plate(x)
+
+
+# ENTRY POINTS
+
+## TWEET STORE
+
+def feed(*s):
+	return map(lambda x: x.split("//"), s)
+
+feed("A", "B//C", "D")
+
+
+
+
+main.state_ = _clojure.rgb_tweet(main.state_, "GRAVITY", 30000)
+
+main.state_ = _clojure.oblong(main.state_, 0, 1)
+main.state_ = _clojure.chaff(main.state_)
+
+
+_clojure.oblong(main.state_)
+
+main.state_
+
+# Personal/1:
+
+def personal():
+	main.state_ = _clojure.clear_tweets(main.state_, "UNIVERSE")
+	tt = feed("Finding myself in a duet//between the here and the possible")
+	#tt = feeds_personal
+	main.state_ = _clojure.add_tweets(main.state_, "UNIVERSE", tt)
+	main.state_ = _clojure.rgb_tweet(main.state_, "UNIVERSE", 50000, [0.2, 0.2, 1])
+
+personal()
+
+
+# Big Bang/2:
+
+def bigBang():
+	main.state_ = _clojure.clear_tweets(main.state_)
+	tt = feed("Many possible worlds interleave//into the tapestry 'What Might Have Been'//showing infinite versions of you",
+		  "As the Universe grew bigger//it got filled with even more stuff//that came from absolutey nowhere")
+	tt = feeds_bigbang
+	main.state_ = _clojure.add_tweets(main.state_, tt)
+	main.state_ = _clojure.rgb_tweet(main.state_, 50000, [1, 1, 0])
+
+bigBang() 
+
+# Gravity/3
+
+def gravity():
+	main.state_ = _clojure.clear_tweets(main.state_)
+	tt = feed("Forces of attraction and repulsion//pull us together or whirl us apart//forever altering the trajectories of all involved")
+	tt = feeds_gravity
+	main.state_ = _clojure.add_tweets(main.state_, tt)
+	main.state_ = _clojure.rgb_tweet(main.state_, 50000, [1, 1, 1])
+
+gravity()
+
+
+# Universe/4
+
+def universe():
+	main.state_ = _clojure.clear_tweets(main.state_)
+	tt = feed("Energy and matter from the common cosmic treasury//made briefly self-aware//Sundered from us by decision or chance",
+		  "Milling around us invisibly//they haunt us like absent friends",
+		  "Sometimes I think the surest sign//that intelligent life exists elsewhere in the Universe//is that none of it has tried to contact us",
+		  "From singularity to infinity//all the unfolding of the Universe is interconnected",
+		  "Man is a Universe within himself")
+	tt = feeds_universe
+	main.state_ = _clojure.add_tweets(main.state_, tt)
+	#main.state_ = _clojure.tweet(main.state_, 20000, 500)
+	main.state_ = _clojure.rgb_tweet(main.state_, 50000, [0.8, 0.2, 1])
+
+universe()
+
+# Personal dream/5
+
+def dream():
+	main.state_ = _clojure.clear_tweets(main.state_)
+	tt = feed("Finding myself in a duet//between the here and the possible")
+	tt = feeds_dreams
+	main.state_ = _clojure.add_tweets(main.state_, tt)
+	#main.state_ = _clojure.tweet(main.state_, 20000, 500)
+	main.state_ = _clojure.rgb_tweet(main.state_, 50000, [1, 0.3, 0.4])
+
+dream()
+
+
+
+main.state_ = _clojure.clear_tweets(main.state_)
+main.state_ = _clojure.add_tweets(main.state_, b1)
+main.state_ = _clojure.add_tweets(main.state_, b2)
+main.state_ = _clojure.add_tweets(main.state_, b3)
+main.state_ = _clojure.add_tweets(main.state_, b4)
+
+
+## CUEING
+
+fg_rgb((1.0, 1.0, 1.0), 5000)
+main.state_ = _clojure.tweet(main.state_, 20000, 300)
+
+main.state_ = _clojure.rgb_tweet(main.state_, 20000, [1, 0.5, 0])
+
+
+
+"A/B/C/D".split("/")

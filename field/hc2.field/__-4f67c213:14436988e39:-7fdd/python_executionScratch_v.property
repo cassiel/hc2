@@ -1,0 +1,5 @@
+string>main.state_ = _clojure.clear_tweets(main.state_, PHASES.GRAVITY)
+
+# A list of tweets, each of which is a list of tokens.
+
+main.state_ = _clojure.add_tweets(main.state_, PHASES.GRAVITY, [["A B C D", "E"]])

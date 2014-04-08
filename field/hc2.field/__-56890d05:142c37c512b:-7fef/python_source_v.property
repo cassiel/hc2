@@ -1,0 +1,12 @@
+string>def doSquare(mesh, cx, cy, width, colour):
+	[x1, x2] = [cx - width / 2, cx + width / 2]
+	[y1, y2] = [cy - width / 2, cy + width / 2]
+	
+	p1 = mesh ** {_vertex: Vector3(x1, y1, 0), _color: colour}
+	p2 = mesh ** {_vertex: Vector3(x2, y1, 0), _color: colour}
+	p3 = mesh ** {_vertex: Vector3(x2, y2, 0), _color: colour}
+	mesh ** [p1, p2, p3]
+
+	[p1, p3] = [p3, p1]
+	p2 = mesh ** {_vertex: Vector3(x1, y2, 0), _color: colour}
+	mesh ** [p1, p2, p3]

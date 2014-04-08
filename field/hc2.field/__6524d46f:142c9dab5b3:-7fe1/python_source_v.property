@@ -1,0 +1,10 @@
+string>geometry = quads.getUnderlyingGeometry()	
+vertexBuffer = geometry.vertex()
+for n in range(1000):
+	point = int(4000*Math.random())
+	n = point
+	to = Vector3().noise(100)
+	for q in range(4):
+		vertexBuffer.put(4*3*n+0+q*3, to.x)
+		vertexBuffer.put(4*3*n+1+q*3, to.y)
+		vertexBuffer.put(4*3*n+2+q*3, to.z)

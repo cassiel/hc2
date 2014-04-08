@@ -1,0 +1,7 @@
+string>if not _self.shader_:
+	ve = _self.find[VEs.CANVAS][0]
+	ve()
+	c = ve.canvas_
+	s = makeShaderFromElement(_self)
+	s << DisableDepthTest()
+	_self.shader_ = s

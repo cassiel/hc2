@@ -1,0 +1,35 @@
+string>#--{1. Clojure}
+Clojure(OKeyByName("Component_transformBlockStart:3fe07c57:142bd2deb6a:-7ff4.transient", None), r"""
+
+(ns user
+	(:require (net.monomatic.glock.animation
+		[matrix :as m])
+	 :reload-all))
+
+(def matrix m/RAW-MATRIX)
+""", globals())
+#--{\\1. Clojure}
+
+print _clojure.matrix[0]
+
+ORIGIN = [50, 50]
+
+ROWS = 58
+COLS = 60
+PITCH = 10
+
+_self.lines.clear()
+
+for y in range(ROWS):
+	for x in range(COLS):
+		line = FLine(filled=1)
+		present = _clojure.matrix[y][x]
+		if present:
+			line(fillColor=Vector4(0, 0, 0, 1))
+		else:
+			line(fillColor=Vector4(1, 1, 1, 0.2))
+		line(strokeColor=Vector4(0, 0, 0, 0))
+		line.rect(ORIGIN[0] + x * PITCH,
+			  ORIGIN[1] + y * PITCH,
+			  8, 8)
+		_self.lines.add(line)

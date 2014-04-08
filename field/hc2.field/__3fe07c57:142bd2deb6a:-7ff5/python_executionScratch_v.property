@@ -1,0 +1,5 @@
+string>_self.lines.clear()
+
+line = FLine()
+line.rect(100, 100, 100, 50)
+_self.lines.add(line)

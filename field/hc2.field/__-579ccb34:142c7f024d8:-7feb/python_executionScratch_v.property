@@ -1,0 +1,9 @@
+string>cam = _self.canvas_.getCamera()
+
+print cam.getState()
+
+cam.setPosition(Vector3(0, 0, 150))
+cam.setLookAt(Vector3(0, 0, 0))
+cam.setUp(Vector3(0, 1, 0))
+
+drawLayout(0, 0)
