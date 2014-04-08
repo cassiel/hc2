@@ -1,8 +1,9 @@
 string>def clear():
 	canvas.lines().clear()
 
-def doText(text, r=0, xm=1, ym=1):
-	line = FLine(color=Color4(1, 1, 1, 0.8), filled=True)\
+def doText(text, r=0, xm=1, ym=1, col=[1, 1, 1]):
+	c = Color4(col[0], col[1], col[2], 0.8)
+	line = FLine(color=c, filled=True)\
 		.appendVectorText2(text, 0, 0, font="Optima", size=100)
 
 	lo, hi = line.bounds()
@@ -19,8 +20,22 @@ def centreText(text):
 	clear()
 	doText(text)
 
-def text3(top, mid, bot, r=0):
+def text3(top, mid, bot, r=0, col=[1, 1, 1]):
 	clear()
-	doText(top, ym=-4, r=r)
-	doText(mid, r=r)
-	doText(bot, ym=6, r=r)
+	doText(top, ym=-4, r=r, col=col)
+	doText(mid, r=r, col=col)
+	doText(bot, ym=7, r=r, col=col)
+
+# Actions
+actions = ["Throw", "Slide", "Melt", "Jab", "Expand", "Float", "Whisk"]
+# Actions
+actions2 = ["Jump", "Push", "Hover", "Spiral", "Flip"]
+# Dynamics and qualities
+qualities = ["Continuous", "Slow", "Sudden", "Sustain", "Fast", "Strong"]
+
+parts = ["Leg", "Arm", "Spine", "Knees", "Shoulders", "Foot", "Hand", "Hip", "Head", "Torso"]
+
+import random
+
+def randText(col=[1, 1, 1]):
+	text3(random.choice(parts), random.choice(actions), random.choice(qualities), col=col)

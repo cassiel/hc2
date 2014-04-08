@@ -21,4 +21,10 @@ if 0:
 
 text3("A", "B", "C", r=0)
 
+cols = [[1, 1, 1], [1, 0.7, 0]]
+choice = 0
 
+choice = 1 - choice
+randText(col=cols[choice])
+
+clear()
