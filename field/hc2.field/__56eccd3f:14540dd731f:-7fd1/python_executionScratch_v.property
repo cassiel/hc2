@@ -1,7 +1,7 @@
 string>#line = FLine().moveTo(-100,0,100).lineTo(100,0,100)(color=Color4(1,0,0,0.5))
 
-line = FLine(color=Color4(1, 1, 1, 0.8), filled=True).appendVectorText2("AA", 0, 0, font="Optima", size=20)
-ll = canvas.lines()
+clear()
+bigCentre("B")
 
-ll.clear()
-ll.add(line)
+clear()
+bigCentre("XXXX")

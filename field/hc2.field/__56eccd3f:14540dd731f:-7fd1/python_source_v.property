@@ -1,1 +1,14 @@
-string>
+string>def clear():
+	canvas.lines().clear()
+
+def bigCentre(text):
+	line = FLine(color=Color4(1, 1, 1, 0.8), filled=True)\
+		.appendVectorText2(text, 0, 0, font="Optima", size=20)
+
+	lo, hi = line.bounds()
+	mid_X = (hi[0] - lo[0]) / 2
+	mid_Y = (hi[1] - lo[1]) / 2
+	line += Vector3(-mid_X, +mid_Y, 0)
+
+	ll = canvas.lines()
+	ll.add(line)
