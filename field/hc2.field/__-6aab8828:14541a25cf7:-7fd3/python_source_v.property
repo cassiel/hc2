@@ -1,8 +1,9 @@
-string>LAYOUT = Manifest(BRACKET_PITCH = 30,
+string>LAYOUT = Manifest(BRACKET_PITCH = 40,
 				  TAG_PITCH = 100,
 				  OUTDENT = 80,
 				  THICKNESS = 20,
-				  TAG_DOWNSHIFT = 50)
+				  TAG_DOWNSHIFT = 50,
+				  PLANT_DEBUG=False)
 
 def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100):
 	"""Render a single line of text. Slightly tricky
@@ -11,16 +12,16 @@ def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100):
 	c = Color4(rgb[0], rgb[1], rgb[2], 0.8 * presence)
 	line = FLine(color=c, filled=True) \
 		.appendVectorText2(text, x, y, font="Optima", size=size)
-	canvas.lines().add(FLine(color=Color4(0, 0, 1, 0.5), filled=1).circle(6, x, y))
+
+	if LAYOUT.PLANT_DEBUG:
+		canvas.lines().add(FLine(color=Color4(0, 0, 1, 0.5), filled=1).circle(6, x, y))
 
 	b = line.bounds2()
 	line += Vector2(0, b.h)
 	return [line, line.bounds2()]
 
 def renderSlug(slug, presence, x0, y0):
-	"""Takes a Manifest(clojure object). Returns [lines, bounds].
-	   We render so that (x, y) is the top left of the bracket.
-	"""
+	"""Takes a Manifest(clojure object). Returns [lines, bounds]."""
 	if hasattr(slug, "presence"):
 		p = presence * slug.presence
 	else:
@@ -28,22 +29,26 @@ def renderSlug(slug, presence, x0, y0):
 
 	y = y0
 	if hasattr(slug, "leaf"):
-		l, b = renderLeaf(slug.leaf, p, x, y)
+		l, b = renderLeaf(slug.leaf, p, x0, y0)
 		return [l], b
 	else:
 		lines = []
 		# Marker of origin (debugging):
-		canvas.lines().add(FLine(color=Color4(0, 1, 0, 0.5), filled=1).circle(6, x0, y0))
+		if LAYOUT.PLANT_DEBUG:
+			canvas.lines().add(FLine(color=Color4(0, 1, 0, 0.5), filled=1).circle(6, x0, y0))
 
-		if hasattr(slug, "tag"):
-			tag = slug.tag
+		if hasattr(slug, "vtag") and slug.vtag is not None:
+			tag = Manifest(text=slug.vtag, size=80, rot=True)
+		elif hasattr(slug, "htag") and slug.htag is not None:
+			tag = Manifest(text=slug.htag, size=150, rot=False)
 		else:
 			tag = None
 
-		if hasattr(slug, "tcolour"):
-			tcolour = slug.tcolour
-		else:
-			tcolour = [0.3, 0.3, 0.3]
+		if tag is not None:
+			if hasattr(slug, "tcolour"):
+				tag.colour = slug.tcolour
+			else:
+				tag.colour = [0.3, 0.3, 0.3]
 
 		children = slug.children
 		if len(children) == 0: children = ["---"]
@@ -59,6 +64,7 @@ def renderSlug(slug, presence, x0, y0):
 		else:
 			indentBracket = LAYOUT.TAG_PITCH
 			indentPayload = LAYOUT.TAG_PITCH + LAYOUT.BRACKET_PITCH
+
 		for c in children:
 			clines, cbounds = renderSlug(c, p, x0 + indentPayload, y)
 			lines.extend(clines)
@@ -75,26 +81,29 @@ def renderSlug(slug, presence, x0, y0):
 					 lo_y,
 					 LAYOUT.THICKNESS,
 					 hi_y - lo_y)
+		lo_x = min(lo_x, x0 + indentBracket)
 		lines.append(bracket)
 
 		# Tag, if we have one:
 		if tag is not None:
-			l, b = renderLeaf(tag,
+			l, b = renderLeaf(tag.text,
 							  p,
 							  x0,
 							  y0 + LAYOUT.TAG_DOWNSHIFT,
-							  size=150,
-							  rgb=tcolour)
+							  size=tag.size,
+							  rgb=tag.colour)
 
-			#l += CFrame(r=Math.PI / 2, center=[int(b.x + b.w / 2), int(b.y + b.h / 2)])
-			#b = l.bounds2()
+			if tag.rot:
+				rotOffset = b.h / 2
+				l += CFrame(r=Math.PI / 2, center=Vector2(b.x + rotOffset, b.y + rotOffset))
+				b = l.bounds2()
 
 			lo_x = min(lo_x, b.x)
 			lo_y = min(lo_y, b.y)
 			lines.append(l)
 
 		# Fiducial outline:
-		fid = FLine(filled=0, color=Color4(1, 1, 1, p * 0.5))
+		fid = FLine(filled=0, color=Color4(1, 1, 1, p * 0.2))
 
 		fid.rect(lo_x, lo_y, hi_x - lo_x, hi_y - lo_y)
 		lines.append(fid)

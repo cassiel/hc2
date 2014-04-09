@@ -3,7 +3,7 @@ string>_self.tintColour = Color4(1.0, 0.5, 0.2, 0.3)
 _self.state_ = _clojure.box(_self.state_, _clojure.hc1(), 0, 180000)
 _self.state_ = _clojure.box(_self.state_, _clojure.hc2(), 0, 180000)
 _self.state_ = _clojure.box(_self.state_, _clojure.hc3(), 0, 180000)
-_self.state_ = _clojure.box(_self.state_, _clojure.hc4(), 0, 180000)
+_self.state_ = _clojure.box(_self.state_, _clojure.hc4(), 0, 10000)
 
 _self.state_ = _clojure.box(_clojure.init(), _clojure.simple(), 0, 10000)
 
