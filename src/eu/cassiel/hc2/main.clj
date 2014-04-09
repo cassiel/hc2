@@ -46,12 +46,12 @@
                             (leaf "legs")]})
 
 (defn hc4 [] {:tag "X"
-                 :children [{:tag "Y"
-                             :children (map leaf ["rise expand"
-                                                  "pendulum glide"
-                                                  "float"])}
-                            (leaf "hard")
-                            (leaf "shoulder")]})
+              :children [{:tag "Y"
+                          :children (map leaf ["rise expand"
+                                               "pendulum glide"
+                                               "float"])}
+                         (leaf "hard")
+                         (leaf "shoulder")]})
 
 (defn tag-presence [tree pos]
   (when-let [children (:children tree)]
