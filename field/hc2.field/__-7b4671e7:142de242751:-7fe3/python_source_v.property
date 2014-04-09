@@ -1,9 +1,17 @@
 string>def sample(pos):
 	"pos is wrt. animation frames; not too relevant here."
 	data, newState = _clojure.step(_self.state_, System.currentTimeMillis())
-	print data
 	_self.state_ = newState
-				   
+
+	canvas.lines().clear()
+
+	if data is not None:
+		for d in data:
+			rr = renderSlug(Manifest(d), 0, 0)
+			for r in rr[0]:
+				r += Vector2(-rr[1].w / 2, -rr[1].h / 2)
+				canvas.lines().add(r)
+
 PRINT = False
 
 def start():

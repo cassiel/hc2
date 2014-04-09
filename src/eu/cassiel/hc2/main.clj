@@ -13,8 +13,13 @@
                                                       {:leaf "float expand"}
                                                       {:leaf "whisk"}]}
                              {:leaf "strong"}
-                             {:leaf "leg"}
-                             {:tag "XXX" :children [{:leaf "Donk"}]}]})
+                             {:leaf "leg"}]})
 
 (defn bang [state]
   (a/cue-anim state a/null-anim 500 2000))
+
+(defn cue-box [state box cue len]
+  (a/cue-anim state
+              (fn [state] (fn [state pos] [box state]))
+              cue
+              len))

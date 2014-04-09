@@ -8,14 +8,20 @@ string>#--{1. Clojure}
 
 (nr/refresh)
 
-(defn init [] eu.cassiel.hc2.animo/initial-state)
+(ns user
+	(:require
+		(eu.cassiel.hc2
+			[animo :as a]
+			[main :as m])))
 
-(defn step [state ms] (eu.cassiel.hc2.animo/render-anims state ms))
+(defn init [] a/initial-state)
 
-(defn bang [state] (eu.cassiel.hc2.main/bang state))
+(def t1 m/test_tree)
+(def t2 m/test_tree_2)
 
-;; (def tt eu.cassiel.hc2.main/test_tree_2)
+(defn step [state ms] (a/render-anims state ms))
+
+(defn box [state b cue lenMS] (m/cue-box state b cue lenMS))
 
 """, globals())
 #--{\\1. Clojure}
-

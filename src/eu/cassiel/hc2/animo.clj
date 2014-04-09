@@ -64,6 +64,7 @@
                   (purge))]
     (reduce (fn [[outputs state] anim]
               (let [[x state'] (render-item state anim)]
-                [(cons x outputs) state']))
+                [(if x (cons x outputs) outputs)
+                 state']))
             [nil state]
             (:anims state))))

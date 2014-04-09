@@ -1,1 +1,5 @@
 string>
+_self.python_globals_.declare(_self, "renderSlug")
+_self.python_globals_.declare(_self, "INDENT")
+_self.python_globals_.declare(_self, "renderLeaf")
+_self.python_globals_.declare(_self, "THICKNESS")
