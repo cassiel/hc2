@@ -5,7 +5,7 @@ _self.state_ = _clojure.box(_self.state_, _clojure.hc2(), 0, 180000)
 _self.state_ = _clojure.box(_self.state_, _clojure.hc3(), 0, 180000)
 _self.state_ = _clojure.box(_self.state_, _clojure.hc4(), 0, 180000)
 
-_self.state_ = _clojure.box(_self.state_, _clojure.simple(), 0, 100000)
+_self.state_ = _clojure.box(_clojure.init(), _clojure.simple(), 0, 10000)
 
 
 _self.state_ = _clojure.init()

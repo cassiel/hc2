@@ -1,21 +1,24 @@
-string>def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100):
-	"Render a single line of text. Tricky because we are rendering downwards."
+string>LAYOUT = Manifest(INDENT_BRACKET = 100,
+				  INDENT_PAYLOAD = 130,
+				  INDENT_TAG = 0,
+				  OUTDENT = 80,
+				  THICKNESS = 20,
+				  TAG_DOWNSHIFT = 50)
+
+def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100):
+	"""Render a single line of text. Slightly tricky
+	   because we are rendering downwards (hence the vector shift).
+	"""
 	c = Color4(rgb[0], rgb[1], rgb[2], 0.8 * presence)
 	line = FLine(color=c, filled=True) \
 		.appendVectorText2(text, x, y, font="Optima", size=size)
+	canvas.lines().add(FLine(color=Color4(0, 0, 1, 0.5), filled=1).circle(6, x, y))
 
 	b = line.bounds2()
 	line += Vector2(0, b.h)
-	return [[line], line.bounds2()]
+	return [line, line.bounds2()]
 
-INDENT_BRACKET = 100
-INDENT_PAYLOAD = 130
-INDENT_TAG = 0
-OUTDENT = 80
-THICKNESS = 20
-TAG_DOWNSHIFT = 50
-
-def renderSlug(slug, presence, x, y):
+def renderSlug(slug, presence, x0, y0):
 	"""Takes a Manifest(clojure object). Returns [lines, bounds].
 	   We render so that (x, y) is the top left of the bracket.
 	"""
@@ -24,14 +27,19 @@ def renderSlug(slug, presence, x, y):
 	else:
 		p = presence
 
-	y0 = y
+	y = y0
 	if hasattr(slug, "leaf"):
-		return renderLeaf(slug.leaf, p, x, y)
+		l, b = renderLeaf(slug.leaf, p, x, y)
+		return [l], b
 	else:
+		lines = []
+		# Marker of origin (debugging):
+		canvas.lines().add(FLine(color=Color4(0, 1, 0, 0.5), filled=1).circle(6, x0, y0))
+
 		if hasattr(slug, "tag"):
 			tag = slug.tag
 		else:
-			tag = "."
+			tag = None
 
 		if hasattr(slug, "tcolour"):
 			tcolour = slug.tcolour
@@ -40,7 +48,6 @@ def renderSlug(slug, presence, x, y):
 
 		children = slug.children
 		if len(children) == 0: children = ["---"]
-		lines = []
 		
 		lo_x =  99999
 		lo_y =  99999
@@ -48,7 +55,7 @@ def renderSlug(slug, presence, x, y):
 		hi_y = -99999
 
 		for c in children:
-			clines, cbounds = renderSlug(c, p, x + INDENT_PAYLOAD, y)
+			clines, cbounds = renderSlug(c, p, x0 + LAYOUT.INDENT_PAYLOAD, y)
 			lines.extend(clines)
 			# Y grows downwards, so:
 			lo_x = min(lo_x, cbounds.x)
@@ -59,22 +66,27 @@ def renderSlug(slug, presence, x, y):
 
 		# Bracket:
 		bracket = FLine(filled=1, color=Color4(1, 0, 0, p * 0.8))
-		bracket.rect(x + INDENT_BRACKET,
+		bracket.rect(x0 + LAYOUT.INDENT_BRACKET,
 					 lo_y,
-					 THICKNESS,
+					 LAYOUT.THICKNESS,
 					 hi_y - lo_y)
 		lines.append(bracket)
 
 		# Tag, if we have one:
-		l, b = renderLeaf(tag, p, x + INDENT_TAG, y0 + TAG_DOWNSHIFT, size=150, rgb=tcolour)
-		l = l[0]
+		if tag is not None:
+			l, b = renderLeaf(tag,
+							  p,
+							  x0 + LAYOUT.INDENT_TAG,
+							  y0 + LAYOUT.TAG_DOWNSHIFT,
+							  size=150,
+							  rgb=tcolour)
 
-		#l += CFrame(r=Math.PI / 2, center=[int(b.x + b.w / 2), int(b.y + b.h / 2)])
-		#b = l.bounds2()
+			#l += CFrame(r=Math.PI / 2, center=[int(b.x + b.w / 2), int(b.y + b.h / 2)])
+			#b = l.bounds2()
 
-		lo_x = min(lo_x, b.x)
-		lo_y = min(lo_y, b.y)
-		lines.append(l)
+			lo_x = min(lo_x, b.x)
+			lo_y = min(lo_y, b.y)
+			lines.append(l)
 
 		# Fiducial outline:
 		fid = FLine(filled=0, color=Color4(1, 1, 1, p * 0.5))

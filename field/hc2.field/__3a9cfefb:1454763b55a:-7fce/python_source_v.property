@@ -1,0 +1,2 @@
+string>main = _self.find[VEs.MAIN][0]
+main.state_ = _clojure.box(_clojure.init(), _clojure.simple(), 0, 3000)

@@ -1,0 +1,2 @@
+string>_self.tintColour = Color4(0.3, 1, 0.3, 0.3)
+_self.in_play = True

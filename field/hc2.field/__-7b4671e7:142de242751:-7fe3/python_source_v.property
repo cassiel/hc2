@@ -16,8 +16,8 @@ string>def sample(pos):
 
 			rr = renderSlug(d, 1.0, 0, 0)
 			for r in rr[0]:
-				r += Vector2(-rr[1].w / 2, -rr[1].h / 2)
-				r += CFrame(r=Math.PI * 2 * rot)
+				#r += Vector2(-rr[1].w / 2, -rr[1].h / 2)
+				#r += CFrame(r=Math.PI * 2 * rot)
 				canvas.lines().add(r)
 
 PRINT = False

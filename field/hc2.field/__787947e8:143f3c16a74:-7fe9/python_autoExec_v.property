@@ -8,3 +8,4 @@ def customPaint(source, bounds, visible):
              thickness=0.5,
              stroked=False)     
         paintPLineNow(line)
+_self.python_globals_.declare(_self, "x")
