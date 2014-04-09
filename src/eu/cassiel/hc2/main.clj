@@ -26,6 +26,7 @@
 
 
 (defn hc1 [] (let [rot (rand)] (fn [pos] {:tag "2"
+                                         :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
                                          :children [{:children (map leaf ["spiral rebound"
                                                                           "expand swing"
                                                                           "jump"])}
@@ -36,12 +37,14 @@
 
 (defn hc2 [] (let [rot (rand)] (fn [pos] {:tag "." ;;backwards
                                          :children [{:tag "5"
-                                                     :children (map leaf ["rotate isolate"
-                                                                          "whisk pull"
-                                                                          "flip"])}
-                                                    (leaf "quick")
-                                                    #_ {:tag "X" :children (map leaf ["A" "B" "C" "D" "E" "F"])}
-                                                    (leaf "arms")]
+                                                     :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                                     :children [{:tag "."
+                                                                 :children (map leaf ["rotate isolate"
+                                                                                      "whisk pull"
+                                                                                      "flip"])}
+                                                                 (leaf "quick")
+                                                                 #_ {:tag "X" :children (map leaf ["A" "B" "C" "D" "E" "F"])}
+                                                                 (leaf "arms")]}]
                                          :rotation rot})))
 
 (defn hc3 [] (let [rot (rand)] (fn [pos] {:tag "." ;;diagonal

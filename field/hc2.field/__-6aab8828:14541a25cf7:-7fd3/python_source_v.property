@@ -33,6 +33,11 @@ def renderSlug(slug, presence, x, y):
 		else:
 			tag = "."
 
+		if hasattr(slug, "tcolour"):
+			tcolour = slug.tcolour
+		else:
+			tcolour = [0.3, 0.3, 0.3]
+
 		children = slug.children
 		if len(children) == 0: children = ["---"]
 		lines = []
@@ -61,7 +66,7 @@ def renderSlug(slug, presence, x, y):
 		lines.append(bracket)
 
 		# Tag, if we have one:
-		l, b = renderLeaf(tag, p, x + INDENT_TAG, y0 + TAG_DOWNSHIFT, size=150, rgb=[1, 0.8, 0.4])
+		l, b = renderLeaf(tag, p, x + INDENT_TAG, y0 + TAG_DOWNSHIFT, size=150, rgb=tcolour)
 		l = l[0]
 
 		#l += CFrame(r=Math.PI / 2, center=[int(b.x + b.w / 2), int(b.y + b.h / 2)])
