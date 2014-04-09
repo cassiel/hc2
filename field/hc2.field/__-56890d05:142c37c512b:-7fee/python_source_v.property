@@ -25,6 +25,8 @@ string>#--{1. Clojure}
 (defn hc3 [] (m/hc3))
 (defn hc4 [] (m/hc4))
 
+(defn simple [] (m/simple))
+
 (defn step [state ms] (a/render-anims state ms))
 
 (defn box [state b cue lenMS] (m/cue-box state b cue lenMS))

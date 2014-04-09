@@ -11,3 +11,5 @@ if 1:
 if 0:
 	canvas.lines().clear()
 	canvas.lines().add(FLine(thickness=1, pointed=1, pointSize=10, color=Color4(1, 1, 1, 0.5)).rect(0, 0, 100, 200))
+
+_self.tintColour = Color4(0.3, 0.3, 0.3, 0.5)

@@ -1,27 +1,38 @@
-string>def renderLeaf(text, presence, x, y):
+string>def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100):
 	"Render a single line of text. Tricky because we are rendering downwards."
-	c = Color4(1, 1, 1, 0.8 * presence)
+	c = Color4(rgb[0], rgb[1], rgb[2], 0.8 * presence)
 	line = FLine(color=c, filled=True) \
-		.appendVectorText2(text, x, y, font="Optima", size=100)
+		.appendVectorText2(text, x, y, font="Optima", size=size)
 
 	b = line.bounds2()
 	line += Vector2(0, b.h)
 	return [[line], line.bounds2()]
 
-INDENT = 50
+INDENT_BRACKET = 100
+INDENT_PAYLOAD = 130
+INDENT_TAG = 0
+OUTDENT = 80
 THICKNESS = 20
+TAG_DOWNSHIFT = 50
 
 def renderSlug(slug, presence, x, y):
-	"Takes a Manifest(clojure object). Returns [lines, bounds]."
+	"""Takes a Manifest(clojure object). Returns [lines, bounds].
+	   We render so that (x, y) is the top left of the bracket.
+	"""
 	if hasattr(slug, "presence"):
 		p = presence * slug.presence
 	else:
 		p = presence
 
+	y0 = y
 	if hasattr(slug, "leaf"):
 		return renderLeaf(slug.leaf, p, x, y)
 	else:
-		#tag = slug.tag
+		if hasattr(slug, "tag"):
+			tag = slug.tag
+		else:
+			tag = "."
+
 		children = slug.children
 		if len(children) == 0: children = ["---"]
 		lines = []
@@ -32,7 +43,7 @@ def renderSlug(slug, presence, x, y):
 		hi_y = -99999
 
 		for c in children:
-			clines, cbounds = renderSlug(c, p, x + INDENT, y)
+			clines, cbounds = renderSlug(c, p, x + INDENT_PAYLOAD, y)
 			lines.extend(clines)
 			# Y grows downwards, so:
 			lo_x = min(lo_x, cbounds.x)
@@ -41,12 +52,26 @@ def renderSlug(slug, presence, x, y):
 			hi_y = max(hi_y, cbounds.y + cbounds.h)
 			y += cbounds.h
 
-		bracket = FLine(filled=1, color=Color4(1, 0, 0, p))
-		bracket.rect(lo_x - INDENT,
+		# Bracket:
+		bracket = FLine(filled=1, color=Color4(1, 0, 0, p * 0.8))
+		bracket.rect(x + INDENT_BRACKET,
 					 lo_y,
 					 THICKNESS,
 					 hi_y - lo_y)
 		lines.append(bracket)
+
+		# Tag, if we have one:
+		l, b = renderLeaf(tag, p, x + INDENT_TAG, y0 + TAG_DOWNSHIFT, size=150, rgb=[1, 0.8, 0.4])
+		l = l[0]
+
+		#l += CFrame(r=Math.PI / 2, center=[int(b.x + b.w / 2), int(b.y + b.h / 2)])
+		#b = l.bounds2()
+
+		lo_x = min(lo_x, b.x)
+		lo_y = min(lo_y, b.y)
+		lines.append(l)
+
+		# Fiducial outline:
 		fid = FLine(filled=0, color=Color4(1, 1, 1, p * 0.5))
 
 		fid.rect(lo_x, lo_y, hi_x - lo_x, hi_y - lo_y)

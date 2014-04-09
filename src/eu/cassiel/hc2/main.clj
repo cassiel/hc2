@@ -25,9 +25,8 @@
   (nth a (int (* pos (count a)))))
 
 
-(defn hc1 [] (let [rot (rand)] (fn [pos] {:tag "X"
-                                         :children [{:tag "Y"
-                                                     :children (map leaf ["spiral rebound"
+(defn hc1 [] (let [rot (rand)] (fn [pos] {:tag "2"
+                                         :children [{:children (map leaf ["spiral rebound"
                                                                           "expand swing"
                                                                           "jump"])}
                                                     (leaf "obsessive")
@@ -35,8 +34,8 @@
                                                     (leaf "spine")]
                                          :rotation rot})))
 
-(defn hc2 [] (let [rot (rand)] (fn [pos] {:tag "X"
-                                         :children [{:tag "Y"
+(defn hc2 [] (let [rot (rand)] (fn [pos] {:tag "." ;;backwards
+                                         :children [{:tag "5"
                                                      :children (map leaf ["rotate isolate"
                                                                           "whisk pull"
                                                                           "flip"])}
@@ -45,23 +44,25 @@
                                                     (leaf "arms")]
                                          :rotation rot})))
 
-(defn hc3 [] (let [rot (rand)] (fn [pos] {:tag "X"
-                                         :children [{:tag "Y"
-                                                     :children (map leaf ["melt slide"
-                                                                          "rebound float"
-                                                                          "swing hover"])}
-                                                    (leaf "sustain")
-                                                    (leaf "legs")]
+(defn hc3 [] (let [rot (rand)] (fn [pos] {:tag "." ;;diagonal
+                                         :children [{:tag "1"
+                                                     :children [{:children (map leaf ["melt slide"
+                                                                                      "rebound float"
+                                                                                      "swing hover"])}
+                                                                (leaf "sustain")
+                                                                (leaf "legs")]}]
                                          :rotation rot})))
 
-(defn hc4 [] (let [rot (rand)] (fn [pos] {:tag "X"
-                                         :children [{:tag "Y"
-                                                     :children (map leaf ["rise expand"
-                                                                          "pendulum glide"
-                                                                          "float"])}
-                                                    (leaf "hard")
-                                                    (leaf "shoulder")]
+(defn hc4 [] (let [rot (rand)] (fn [pos] {:tag "." ;; right
+                                         :children [{:tag "3"
+                                                     :children [{:children (map leaf ["rise expand"
+                                                                                      "pendulum glide"
+                                                                                      "float"])}
+                                                                (leaf "hard")
+                                                                (leaf "shoulder")]}]
                                          :rotation rot})))
+
+(defn simple [] (fn [pos] {:tag "5" :children (map leaf ["Symphony" "Destiny" "Rhapsody" "Melody" "Harmony"])}))
 
 (defn clip [x]
   (min 1.0 (max 0.0 x)))
