@@ -1,6 +1,6 @@
-string>def renderLeaf(text, x, y):
+string>def renderLeaf(text, presence, x, y):
 	"Render a single line of text. Tricky because we are rendering downwards."
-	c = Color4(1, 1, 1, 0.8)
+	c = Color4(1, 1, 1, 0.8 * presence)
 	line = FLine(color=c, filled=True) \
 		.appendVectorText2(text, x, y, font="Optima", size=100)
 
@@ -11,10 +11,15 @@ string>def renderLeaf(text, x, y):
 INDENT = 50
 THICKNESS = 20
 
-def renderSlug(slug, x, y):
+def renderSlug(slug, presence, x, y):
 	"Takes a Manifest(clojure object). Returns [lines, bounds]."
+	if hasattr(slug, "presence"):
+		p = presence * slug.presence
+	else:
+		p = presence
+
 	if hasattr(slug, "leaf"):
-		return renderLeaf(slug.leaf, x, y)
+		return renderLeaf(slug.leaf, p, x, y)
 	else:
 		#tag = slug.tag
 		children = slug.children
@@ -27,7 +32,7 @@ def renderSlug(slug, x, y):
 		hi_y = -99999
 
 		for c in children:
-			clines, cbounds = renderSlug(c, x + INDENT, y)
+			clines, cbounds = renderSlug(c, p, x + INDENT, y)
 			lines.extend(clines)
 			# Y grows downwards, so:
 			lo_x = min(lo_x, cbounds.x)
@@ -36,13 +41,13 @@ def renderSlug(slug, x, y):
 			hi_y = max(hi_y, cbounds.y + cbounds.h)
 			y += cbounds.h
 
-		bracket = FLine(filled=1, color=Color4(1, 0, 0, 0.6))
+		bracket = FLine(filled=1, color=Color4(1, 0, 0, p))
 		bracket.rect(lo_x - INDENT,
 					 lo_y,
 					 THICKNESS,
 					 hi_y - lo_y)
 		lines.append(bracket)
-		fid = FLine(filled=0, color=Color4(1, 1, 1, 0.3))
+		fid = FLine(filled=0, color=Color4(1, 1, 1, p * 0.5))
 
 		fid.rect(lo_x, lo_y, hi_x - lo_x, hi_y - lo_y)
 		lines.append(fid)

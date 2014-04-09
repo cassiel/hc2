@@ -15,11 +15,25 @@
                              {:leaf "strong"}
                              {:leaf "leg"}]})
 
+(def long-one {:tag "X"
+               :children (map (fn [i] {:leaf (str (inc i))})
+                              (range 6))})
+
+(defn tag-presence [tree pos]
+  (when-let [children (:children tree)]
+    ;; Turn presence to 1.0 along children according to animation position:
+    (let [c (count children)
+          which-are-on (int (inc (* c pos)))]
+      (assoc tree
+        :children
+        (map-indexed (fn [i x] (assoc x :presence (if (< i which-are-on) 1.0 0.0)))
+                     children)))))
+
 (defn bang [state]
   (a/cue-anim state a/null-anim 500 2000))
 
 (defn cue-box [state box cue len]
   (a/cue-anim state
-              (fn [state] (fn [state pos] [box state]))
+              (fn [state] (fn [state pos] [(tag-presence box pos) state]))
               cue
               len))

@@ -1,10 +1,15 @@
 string>_self.tintColour = Color4(1.0, 0.5, 0.2, 0.3)
 
-_self.state_ = _clojure.box(_self.state_, _clojure.t1, 0, 10000)
-_self.state_ = _clojure.box(_self.state_, _clojure.t2, 500, 10000)
+_self.state_ = _clojure.box(_self.state_, _clojure.t1, 0, 1000)
+_self.state_ = _clojure.box(_self.state_, _clojure.t2, 500, 1000)
+_self.state_ = _clojure.box(_self.state_, _clojure.t1, 1000, 1000)
+_self.state_ = _clojure.box(_self.state_, _clojure.t3, 2000, 10000)
 
 ###
 
 _self.printer_ = JPEGPrinter(canvas, "/Users/nick/Desktop/IJAD")
 _self.printer_.start()
 _self.printer_.stop()
+
+
+_self.in_play = True

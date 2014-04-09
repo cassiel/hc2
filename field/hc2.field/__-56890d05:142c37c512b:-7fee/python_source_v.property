@@ -18,6 +18,7 @@ string>#--{1. Clojure}
 
 (def t1 m/test_tree)
 (def t2 m/test_tree_2)
+(def t3 m/long-one)
 
 (defn step [state ms] (a/render-anims state ms))
 

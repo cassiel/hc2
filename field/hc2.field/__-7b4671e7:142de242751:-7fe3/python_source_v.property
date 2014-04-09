@@ -7,7 +7,7 @@ string>def sample(pos):
 
 	if data is not None:
 		for d in data:
-			rr = renderSlug(Manifest(d), 0, 0)
+			rr = renderSlug(Manifest(d), 1.0, 0, 0)
 			for r in rr[0]:
 				r += Vector2(-rr[1].w / 2, -rr[1].h / 2)
 				canvas.lines().add(r)
