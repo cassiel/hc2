@@ -1,6 +1,5 @@
-string>LAYOUT = Manifest(INDENT_BRACKET = 100,
-				  INDENT_PAYLOAD = 130,
-				  INDENT_TAG = 0,
+string>LAYOUT = Manifest(BRACKET_PITCH = 30,
+				  TAG_PITCH = 100,
 				  OUTDENT = 80,
 				  THICKNESS = 20,
 				  TAG_DOWNSHIFT = 50)
@@ -54,8 +53,14 @@ def renderSlug(slug, presence, x0, y0):
 		hi_x = -99999
 		hi_y = -99999
 
+		if tag is None:
+			indentBracket = 0
+			indentPayload = LAYOUT.BRACKET_PITCH
+		else:
+			indentBracket = LAYOUT.TAG_PITCH
+			indentPayload = LAYOUT.TAG_PITCH + LAYOUT.BRACKET_PITCH
 		for c in children:
-			clines, cbounds = renderSlug(c, p, x0 + LAYOUT.INDENT_PAYLOAD, y)
+			clines, cbounds = renderSlug(c, p, x0 + indentPayload, y)
 			lines.extend(clines)
 			# Y grows downwards, so:
 			lo_x = min(lo_x, cbounds.x)
@@ -66,7 +71,7 @@ def renderSlug(slug, presence, x0, y0):
 
 		# Bracket:
 		bracket = FLine(filled=1, color=Color4(1, 0, 0, p * 0.8))
-		bracket.rect(x0 + LAYOUT.INDENT_BRACKET,
+		bracket.rect(x0 + indentBracket,
 					 lo_y,
 					 LAYOUT.THICKNESS,
 					 hi_y - lo_y)
@@ -76,7 +81,7 @@ def renderSlug(slug, presence, x0, y0):
 		if tag is not None:
 			l, b = renderLeaf(tag,
 							  p,
-							  x0 + LAYOUT.INDENT_TAG,
+							  x0,
 							  y0 + LAYOUT.TAG_DOWNSHIFT,
 							  size=150,
 							  rgb=tcolour)

@@ -65,7 +65,7 @@
                                                                 (leaf "shoulder")]}]
                                          :rotation rot})))
 
-(defn simple [] (fn [pos] {:tag (when (> pos 0.5) "5")
+(defn simple [] (fn [pos] {:tagxxx (when (> pos 0.5) "5")
                           :children (map leaf ["Symphony" "Destiny" "Rhapsody" "Melody" "Harmony"])}))
 
 (defn clip [x]
