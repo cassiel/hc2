@@ -1,5 +1,5 @@
 (ns eu.cassiel.hc2.animo
-  "Fairly generic realtime animator. (We need to have a non-realtime version.)")
+  "Fairly generic millisecond-based animator.")
 
 (def initial-state {:anims []
                     :time 0})
@@ -11,9 +11,6 @@
    and a new state."
   [state]
   (fn [state pos] [pos state]))
-
-(def initial-state {:anims []
-                    :time 0})
 
 (defn cue-anim
   "Add a plate to the currently running ones (at the end), ready to start."
@@ -60,8 +57,9 @@
 (defn render-anims
   "Actually call the rendering functions for frames that are in range, returning
    the outputs, plus a new state (possibly with purged entries)."
-  [state]
+  [state ms]
   (let [state (-> state
+                  (assoc :time ms)
                   (set-start-times)
                   (purge))]
     (reduce (fn [[outputs state] anim]

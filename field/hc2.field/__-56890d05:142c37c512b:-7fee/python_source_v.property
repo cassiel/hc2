@@ -8,9 +8,14 @@ string>#--{1. Clojure}
 
 (nr/refresh)
 
-(def tt eu.cassiel.hc2.main/test_tree_2)
+(defn init [] eu.cassiel.hc2.animo/initial-state)
+
+(defn step [state ms] (eu.cassiel.hc2.animo/render-anims state ms))
+
+(defn bang [state] (eu.cassiel.hc2.main/bang state))
+
+;; (def tt eu.cassiel.hc2.main/test_tree_2)
 
 """, globals())
 #--{\\1. Clojure}
 
-_clojure.tt

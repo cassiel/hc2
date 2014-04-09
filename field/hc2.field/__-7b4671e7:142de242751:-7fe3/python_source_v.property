@@ -1,70 +1,24 @@
 string>def sample(pos):
-	_self.counter_ = _self.counter_ + 1
-	_self.state_ = _clojure.step(_self.state_, _self.counter_)
-	struct = Manifest(_clojure.render(_self.state_))
-
-	with g_DiscMesh:
-		for p in struct.points:
-			x, y = p.position
-			for signX, signY in [[1, 1], [1, -1], [-1, 1], [-1, -1]]:
-				xs = x * signX
-				ys = y * signY
-				disc(pos=(xs, ys),
-					 rgba=p.rgba,
-				 	 radius=p.radius,
-					 fill=p.fill)
-			# Permanent "marker" disc:
-				disc(pos=(xs, ys),
-					 rgba=[0.5, 0.5, 0.5, 1],
-					 radius=1,
-					 fill=1)
-
-	canvas.lines().clear()
-	with g_TriMesh:
-		for t in struct.tris:
-			vs = t.vertices
-			(x0, y0), (x1, y1), (x2, y2) = vs
-			triangle(canvas.lines(),
-					 (x0, y0),
-					 (x1, y1),
-					 (x2, y2),
-					 in_rgba=t.in_rgba,
-					 out_rgba=t.out_rgba,
-					 line_rgba=t.line_rgba)
-
-		for x in struct.squares:
-			square(canvas.lines(),
-				   x.vertices,
-				   top_rgba=x.top_rgba,
-				   bot_rgba=x.bot_rgba,
-				   line_rgba=x.line_rgba)
-
-		for x in struct.texts:
-			textit(canvas.lines(),
-				   x.position3D,
-				   text=x.text,
-				   fill_rgba=x.fill_rgba)
+	"pos is wrt. animation frames; not too relevant here."
+	data, newState = _clojure.step(_self.state_, System.currentTimeMillis())
+	print data
+	_self.state_ = newState
 				   
 PRINT = False
 
 def start():
 	_self.find[VEs.ANNOTATION][0]()
 	_self.find[VEs.CLOJUREINTEROP][0]()
+
 	_self.state_ = _clojure.init()
 
-	_self.find[VEs.OSCIN][0].begin()
-	_self.find[VEs.HELLO_DOLLY][0].begin()
-
-	_self.counter_ = 0
-
 	if PRINT:
-		_self.printer_ = JPEGPrinter(canvas, "/Users/nick/Desktop/IJAD")
+		_self.printer_ = JPEGPrinter(canvas, "/Users/nick/Desktop/Sicchio")
 		_self.printer_.start()
 
 	label_NW(_self, "RUNNING")
 
 FRAMES = 500
-
 LOOP = True
 
 def doit():
@@ -79,15 +33,8 @@ def doit():
 	_self.end()
 
 def done():
-	with g_DiscMesh: pass
-	with g_TriMesh: pass
 	if _self.printer_: _self.printer_.stop()
 	label_NW(_self)
 	canvas.lines().clear()
-	_self.find[VEs.OSCIN][0].end()
-	_self.find[VEs.HELLO_DOLLY][0].end()
-	_self.find[VEs.CUES_FROM_OSC][0].end()
-	_self.find[VEs.HAL][0].end()
-	_clojure.save(_self.state_)
 
 _r = (start, doit(), done)
