@@ -7,9 +7,17 @@ string>def sample(pos):
 
 	if data is not None:
 		for d in data:
-			rr = renderSlug(Manifest(d), 1.0, 0, 0)
+			d = Manifest(d)
+
+			if hasattr(d, 'rotation'):
+				rot = d.rotation
+			else:
+				rot = 0.0
+
+			rr = renderSlug(d, 1.0, 0, 0)
 			for r in rr[0]:
 				r += Vector2(-rr[1].w / 2, -rr[1].h / 2)
+				r += CFrame(r=Math.PI * 2 * rot)
 				canvas.lines().add(r)
 
 PRINT = False

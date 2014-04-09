@@ -31,7 +31,7 @@
                                                                           "expand swing"
                                                                           "jump"])}
                                                     (leaf "obsessive")
-                                                    {:tag "X" :children [(leaf (select-by-pos pos ["A" "B" "C" "D" "E" "F" "G" "H"]))]}
+                                                    #_ {:tag "X" :children [(leaf (select-by-pos pos ["A" "B" "C" "D" "E" "F" "G" "H"]))]}
                                                     (leaf "spine")]
                                          :rotation rot})))
 
@@ -41,6 +41,7 @@
                                                                           "whisk pull"
                                                                           "flip"])}
                                                     (leaf "quick")
+                                                    {:tag "X" :children (map leaf ["A" "B" "C" "D" "E" "F"])}
                                                     (leaf "arms")]
                                          :rotation rot})))
 
