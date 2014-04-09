@@ -41,7 +41,7 @@
                                                                           "whisk pull"
                                                                           "flip"])}
                                                     (leaf "quick")
-                                                    {:tag "X" :children (map leaf ["A" "B" "C" "D" "E" "F"])}
+                                                    #_ {:tag "X" :children (map leaf ["A" "B" "C" "D" "E" "F"])}
                                                     (leaf "arms")]
                                          :rotation rot})))
 
