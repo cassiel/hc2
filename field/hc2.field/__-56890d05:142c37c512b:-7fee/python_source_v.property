@@ -16,9 +16,14 @@ string>#--{1. Clojure}
 
 (defn init [] a/initial-state)
 
-(def t1 m/test_tree)
-(def t2 m/test_tree_2)
-(def t3 m/long-one)
+(defn t1 [] (m/tree-1))
+(defn t2 [] (m/tree-2))
+(defn t3 [] (m/tree-3))
+
+(defn hc1 [] (m/hc1))
+(defn hc2 [] (m/hc2))
+(defn hc3 [] (m/hc3))
+(defn hc4 [] (m/hc4))
 
 (defn step [state ms] (a/render-anims state ms))
 

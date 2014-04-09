@@ -1,23 +1,57 @@
 (ns eu.cassiel.hc2.main
   (:require (eu.cassiel.hc2 [animo :as a])))
 
-(def test_tree {:tag "X>"
-                :children [{:leaf "Amy"}
-                           {:leaf "Brenda"}
-                           {:leaf "Brennie"}
-                           {:children [{:leaf "==="} {:leaf "..."}]}
-                           {:leaf "FINALLY"}]})
+(defn tree-1 [] {:tag "X>"
+                 :children [{:leaf "Amy"}
+                            {:leaf "Brenda"}
+                            {:leaf "Brennie"}
+                            {:children [{:leaf "==="} {:leaf "..."}]}
+                            {:leaf "FINALLY"}]})
 
-(def test_tree_2 {:tag "3 *"
-                  :children [{:tag "RIGHT" :children [{:leaf "jab melt slide"}
-                                                      {:leaf "float expand"}
-                                                      {:leaf "whisk"}]}
-                             {:leaf "strong"}
-                             {:leaf "leg"}]})
+(defn tree-2 [] {:tag "3 *"
+                 :children [{:tag "RIGHT" :children [{:leaf "jab melt slide"}
+                                                     {:leaf "float expand"}
+                                                     {:leaf "whisk"}]}
+                            {:leaf "strong"}
+                            {:leaf "leg"}]})
 
-(def long-one {:tag "X"
-               :children (map (fn [i] {:leaf (str (inc i))})
-                              (range 6))})
+(defn tree-3 [] {:tag "X"
+                 :children (map (fn [i] {:leaf (str (inc i))})
+                                (range 10))})
+
+(defn leaf [x] {:leaf x})
+
+(defn hc1 [] {:tag "X"
+                 :children [{:tag "Y"
+                             :children (map leaf ["spiral rebound"
+                                                  "expand swing"
+                                                  "jump"])}
+                            (leaf "obsessive")
+                            (leaf "spine")]})
+
+(defn hc2 [] {:tag "X"
+                 :children [{:tag "Y"
+                             :children (map leaf ["rotate isolate"
+                                                  "whisk pull"
+                                                  "flip"])}
+                            (leaf "quick")
+                            (leaf "arms")]})
+
+(defn hc3 [] {:tag "X"
+                 :children [{:tag "Y"
+                             :children (map leaf ["melt slide"
+                                                  "rebound float"
+                                                  "swing hover"])}
+                            (leaf "sustain")
+                            (leaf "legs")]})
+
+(defn hc4 [] {:tag "X"
+                 :children [{:tag "Y"
+                             :children (map leaf ["rise expand"
+                                                  "pendulum glide"
+                                                  "float"])}
+                            (leaf "hard")
+                            (leaf "shoulder")]})
 
 (defn tag-presence [tree pos]
   (when-let [children (:children tree)]
