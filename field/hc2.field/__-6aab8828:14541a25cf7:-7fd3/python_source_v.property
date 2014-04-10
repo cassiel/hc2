@@ -25,6 +25,9 @@ def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100, invert=False):
 	if invert:
 		line.rect(b.x, b.y, b.w, b.h)
 
+	# Outline debug:
+	line.append(FLine(color=Color4(1, 1, 1, 0.2)).rect(b.x, b.y, b.w, b.h))
+
 	return [line, b]
 
 def renderSlug(slug, presence, x0, y0):

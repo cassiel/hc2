@@ -1,2 +1,3 @@
-string>main = _self.find[VEs.MAIN][0]
-main.state_ = _clojure.box(_clojure.init(), _clojure.e_knees(), 0, 3000)
+string>_self.find[VEs.CLOJUREBIND][0]()
+main = _self.find[VEs.MAIN][0]
+main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(), 0, 10000)
