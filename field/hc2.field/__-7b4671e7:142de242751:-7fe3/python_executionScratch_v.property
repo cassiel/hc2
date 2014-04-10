@@ -1,5 +1,5 @@
 string>_self.find[VEs.CLOJUREBIND][0]()
-_self.state_ = _clojure.box(_self.state_, _clojure.hc1(), 0, 5000)
+_self.state_ = _clojure.box(_self.state_, _clojure.hc2(), 0, 180000)
 
 
 _self.tintColour = Color4(1.0, 0.5, 0.2, 0.3)
@@ -22,3 +22,5 @@ _self.printer_.stop()
 
 
 _self.in_play = True
+
+VEs.CLOJUREBIND
