@@ -5,9 +5,7 @@ string>#--{1. Clojure}
 	(:require
 		(eu.cassiel.hc2
 			[animo :as a]
-			[main :as m])))
-
-(def euroX m/euro)
+			[main :refer :all])))
 
 (defn init [] a/initial-state)
 (defn step [state ms] (a/render-anims state ms))

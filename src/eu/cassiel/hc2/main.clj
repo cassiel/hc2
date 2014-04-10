@@ -148,7 +148,7 @@
 (defn bang [state]
   (a/cue-anim state a/null-anim 500 2000))
 
-(defn cue-box [state box cue len]
+(defn cue_box [state box cue len]
   (a/cue-anim state
               (fn [state] (fn [state pos] [(tag-progress (box pos) [0.0 1.0] pos) state]))
               cue
