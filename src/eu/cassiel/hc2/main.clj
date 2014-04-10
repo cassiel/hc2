@@ -121,7 +121,7 @@
   (let [c (count fn-list)
         super-pos (* pos c)
         f (nth fn-list (int super-pos))]
-    (f (- super-pos (int super-pos))))) ;; Not quite right?
+    (f (mod super-pos 1)))) ;; Not quite right? Ah: :progress gets planted later.
 
 (defn uberbox []
   (let [euro-1 (euro)
@@ -134,7 +134,7 @@
         rot0 (rand)
         rotSpeed (* (srand) 0.5)]
     (fn [pos] {:children [(call-subdivide pos [euro-1 euro-2 knees-1 knees-2 knees-3 switcher original])]
-              :rotation 0.75 #_ (+ rot0 (* rotSpeed pos))})))
+              :rotation 0 #_ (+ rot0 (* rotSpeed pos))})))
 
 (defn clip [x]
   (min 1.0 (max 0.0 x)))

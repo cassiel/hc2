@@ -1,5 +1,5 @@
 string>_self.find[VEs.CLOJUREBIND][0]()
-_self.state_ = _clojure.cue_box(_self.state_, _clojure.uberbox(), 0, 20000)
+_self.state_ = _clojure.cue_box(_clojure.init(), _clojure.uberbox(), 0, 20000)
 
 
 cuePoint = 0
