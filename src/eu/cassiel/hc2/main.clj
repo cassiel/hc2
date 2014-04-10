@@ -117,6 +117,25 @@
                           :tcolour [1 0.8 0.4]
                           :children (map leaf ["Symphony" "Destiny" "Rhapsody" "Melody" "Harmony"])}))
 
+(defn call-subdivide [pos fn-list]
+  (let [c (count fn-list)
+        super-pos (* pos c)
+        f (nth fn-list (int super-pos))]
+    (f (- super-pos (int super-pos)))))
+
+(defn uberbox []
+  (let [euro-1 (euro)
+        euro-2 (euro)
+        knees-1 (e_knees)
+        knees-2 (e_knees)
+        knees-3 (e_knees)
+        switcher (switcher)
+        original (original)
+        rot0 (rand)
+        rotSpeed (* (srand) 0.5)]
+    (fn [pos] {:children [(call-subdivide pos [euro-1 euro-2 knees-1 knees-2 knees-3 switcher original])]
+              :rotation (+ rot0 (* rotSpeed pos))})))
+
 (defn clip [x]
   (min 1.0 (max 0.0 x)))
 
