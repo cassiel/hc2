@@ -2,7 +2,7 @@ string>LAYOUT = Manifest(BRACKET_PITCH = 40,
 				  TAG_PITCH = 100,
 				  OUTDENT = 80,
 				  THICKNESS = 20,
-				  TAG_DOWNSHIFT = 50,
+				  TAG_DOWNSHIFT = 0,
 				  PLANT_DEBUG=False)
 
 def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100, invert=False):
@@ -18,7 +18,7 @@ def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100, invert=False):
 
 	b = line.bounds2()
 	# Shift so we're submerged just below y. Be wary of descenders!
-	line += Vector2(0, b.h)
+	line += Vector2(0, y-b.y)
 
 	b = line.bounds2()
 
@@ -26,7 +26,7 @@ def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100, invert=False):
 		line.rect(b.x, b.y, b.w, b.h)
 
 	# Outline debug:
-	line.append(FLine(color=Color4(1, 1, 1, 0.2)).rect(b.x, b.y, b.w, b.h))
+	###line.append(FLine(color=Color4(1, 1, 1, 0.2)).rect(b.x, b.y, b.w, b.h))
 
 	return [line, b]
 
@@ -114,7 +114,7 @@ def renderSlug(slug, presence, x0, y0):
 			l, b = renderLeaf(tag.text,
 							  p,
 							  x0,
-							  y0 + LAYOUT.TAG_DOWNSHIFT,
+							  lo_y + LAYOUT.TAG_DOWNSHIFT,
 							  size=tag.size,
 							  rgb=tag.colour,
 							  invert=True)
