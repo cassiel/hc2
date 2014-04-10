@@ -25,7 +25,7 @@ PRINT = False
 
 def start():
 	_self.find[VEs.ANNOTATION][0]()
-	_self.find[VEs.CLOJUREINTEROP][0]()
+	_self.find[VEs.CLOJURERELOAD][0]()
 	_self.find[VEs.CAMERA][0]()
 
 	_self.state_ = _clojure.init()

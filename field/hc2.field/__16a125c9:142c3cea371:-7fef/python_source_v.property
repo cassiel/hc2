@@ -21,7 +21,7 @@ class Manifest:
 
 CONFIG = Manifest(BG_COLOUR=Vector3(0, 0, 0))
 
-VEs = Manifest(CLOJUREINTEROP="m_ClojureInterop",
+VEs = Manifest(CLOJURERELOAD="m_ClojureReload",
 			   CLOJUREBIND="m_ClojureBind",
 			   OSCIN="m_OSC In",
 			   CUES_FROM_OSC="Cues from OSC",

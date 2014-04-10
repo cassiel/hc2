@@ -50,6 +50,11 @@ def renderSlug(slug, presence, x0, y0):
 			else:
 				tag.colour = [0.3, 0.3, 0.3]
 
+		if hasattr(slug, "progress"):
+			progress = slug.progress
+		else:
+			progress = 1.0
+
 		children = slug.children
 		if len(children) == 0: children = ["---"]
 		
@@ -76,13 +81,19 @@ def renderSlug(slug, presence, x0, y0):
 			y += cbounds.h
 
 		# Bracket:
-		bracket = FLine(filled=1, color=Color4(1, 0, 0, p * 0.8))
+		bracket = FLine(filled=1, color=Color4(1, 0.7, 0.7, p * 0.8))
 		bracket.rect(x0 + indentBracket,
 					 lo_y,
 					 LAYOUT.THICKNESS,
-					 hi_y - lo_y)
-		lo_x = min(lo_x, x0 + indentBracket)
+					 (hi_y - lo_y) * progress)
 		lines.append(bracket)
+		bracket = FLine(filled=1, color=Color4(1, 0, 0, p * 0.8))
+		bracket.rect(x0 + indentBracket,
+					 lo_y + (hi_y - lo_y) * progress,
+					 LAYOUT.THICKNESS,
+					 (hi_y - lo_y) * (1.0 - progress))
+		lines.append(bracket)
+		lo_x = min(lo_x, x0 + indentBracket)
 
 		# Tag, if we have one:
 		if tag is not None:

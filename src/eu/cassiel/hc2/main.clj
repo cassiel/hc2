@@ -41,14 +41,17 @@
 
 (defn coin [] (> (rand) 0.5))
 
-(defn hc2 [] (let [rot (rand)
+(defn srand [] (- (* (rand) 2) 1))
+
+(defn hc2 [] (let [rot0 (rand)
+                   rotSpeed (* (srand) 0.5)
                    whisk-or-pull (if (coin)
                                    "whisk pull"
                                    "pull whisk")
                    bf (if (coin) "backwards" "forwards")
                    times (str (int (+ 5 (* (rand) 3))))]
                (fn [pos] {:vtag bf
-                         :tcolour [0.2 0.3 1]
+                         :tcolour [0.4 0.7 1]
                          :children [{:htag times
                                      :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
                                      :children [{:children (map leaf ["rotate isolate"
@@ -56,7 +59,7 @@
                                                                       "flip"])}
                                                 (leaf "quick")
                                                 (leaf "arms")]}]
-                         :rotation rot})))
+                         :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn hc3 [] (let [rot (rand)] (fn [pos] {:vtag "diagonal"
                                          :children [{:htag "1"
@@ -86,7 +89,7 @@
 (defn norm-in-range [[p1 p2] pos]
   (clip (/ (- pos p1) (- p2 p1))))
 
-(defn tag-presence
+(defn tag-progress
   "Called at top level of tree, so its bracket, tag etc. are always visible (default presence is 1.0)."
   [tree [p1 p2] pos]
   (if-let [children (:children tree)]
@@ -100,8 +103,9 @@
         (map-indexed (fn [i x] (let [p1' (+ p1 (* i interval))
                                     p2' (+ p1' interval)]
                                 (-> x
-                                    (assoc :presence (if (< i which-are-on) 1.0 0.2))
-                                    (tag-presence [p1' p2'] pos))))
+                                    (assoc :presence (if (< i which-are-on) 1.0 0.2)
+                                           :progress pos')
+                                    (tag-progress [p1' p2'] pos))))
                      children)))
     tree))
 
@@ -110,6 +114,6 @@
 
 (defn cue-box [state box cue len]
   (a/cue-anim state
-              (fn [state] (fn [state pos] [(tag-presence (box pos) [0.0 1.0] pos) state]))
+              (fn [state] (fn [state pos] [(tag-progress (box pos) [0.0 1.0] pos) state]))
               cue
               len))
