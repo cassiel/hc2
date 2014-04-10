@@ -14,7 +14,7 @@ string>#--{1. Clojure}
 (defn t2 [] (m/tree-2))
 (defn t3 [] (m/tree-3))
 
-(defn hc1 [] (m/hc1))
+(defn euro [] (m/euro))
 (defn hc2 [] (m/hc2))
 (defn hc3 [] (m/hc3))
 (defn hc4 [] (m/hc4))

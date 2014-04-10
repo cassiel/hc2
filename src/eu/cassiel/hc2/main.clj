@@ -28,37 +28,49 @@
 
 (defn my-rot [pos] (* 0 (rand)))
 
-(defn hc1 [] (let [rot (rand)] (fn [pos] {:htag "2"
-                                         :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
-                                         :tcolourxxx (repeat 3 pos)
-                                         :children [{:children (map leaf ["spiral rebound"
-                                                                          "expand swing"
-                                                                          (jumper)])}
-                                                    (leaf "obsessive")
-                                                    {:children [(leaf (select-by-pos pos ["A" "B" "C" "D" "E" "F" "G" "H"]))]}
-                                                    (leaf "spine")]
-                                         :rotation (my-rot pos)})))
-
 (defn coin [] (> (rand) 0.5))
 
 (defn srand [] (- (* (rand) 2) 1))
 
-(defn hc2 [] (let [rot0 (rand)
+(defn euro [] (let [rot0 (rand)
+                    rotSpeed (* (srand) 0.5)
+                    whisk-or-pull (rand-nth ["whisk pull"
+                                             "pull whisk"])
+                    arms-or-legs (rand-nth ["arms" "legs"])
+                    quick-or-slow (rand-nth ["quick" "slow"])
+                    bf (rand-nth ["backwards" "forwards"])
+                    times (str (int (+ 5 (* (rand) 3))))]
+                (fn [pos] {:vtag bf
+                          :tcolour [0.4 0.7 1]
+                          :children [{:htag times
+                                      :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                      :children [{:children (map leaf ["rotate isolate"
+                                                                       whisk-or-pull
+                                                                       "flip"])}
+                                                 (leaf quick-or-slow)
+                                                 (leaf arms-or-legs)]}]
+                          :rotation (+ rot0 (* rotSpeed pos))})))
+
+(defn hc1 [] (let [rot0 (rand)
                    rotSpeed (* (srand) 0.5)
-                   whisk-or-pull (if (coin)
-                                   "whisk pull"
-                                   "pull whisk")
-                   bf (if (coin) "backwards" "forwards")
-                   times (str (int (+ 5 (* (rand) 3))))]
-               (fn [pos] {:vtag bf
+                   actions (shuffle ["spiral"
+                                     "rebound"
+                                     "expand"
+                                     "swing"
+                                     "jump"])
+                   part (rand-nth ["spine" "fingers" "knees" "chin"])]
+               (fn [pos] {:vtag "diagonal"
                          :tcolour [0.4 0.7 1]
-                         :children [{:htag times
+                         :children [{:htag "2"
                                      :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
-                                     :children [{:children (map leaf ["rotate isolate"
-                                                                      whisk-or-pull
-                                                                      "flip"])}
-                                                (leaf "quick")
-                                                (leaf "arms")]}]
+                                     :children [{:children (map leaf actions)}
+                                                (leaf (select-by-pos pos ["obsessive"
+                                                                          "obsessive"
+                                                                          "obsessive"
+                                                                          "cautious"
+                                                                          "skeptical"
+                                                                          "lustful"]))
+                                                (leaf part)]}]
                          :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn hc3 [] (let [rot (rand)] (fn [pos] {:vtag "diagonal"
@@ -103,10 +115,12 @@
         (map-indexed (fn [i x] (let [p1' (+ p1 (* i interval))
                                     p2' (+ p1' interval)]
                                 (-> x
+                                    (tag-progress [p1' p2'] pos)
                                     (assoc :presence (if (< i which-are-on) 1.0 0.2)
-                                           :progress pos')
-                                    (tag-progress [p1' p2'] pos))))
-                     children)))
+                                           :progress (norm-in-range [p1' p2'] pos'))
+                                    )))
+                     children)
+        :progress pos))
     tree))
 
 (defn bang [state]
