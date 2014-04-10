@@ -81,13 +81,13 @@ def renderSlug(slug, presence, x0, y0):
 			y += cbounds.h
 
 		# Bracket:
-		bracket = FLine(filled=1, color=Color4(1, 0.7, 0.7, p * 0.8))
+		bracket = FLine(filled=1, color=Color4(1, 0.2, 0.2, p * 0.8))
 		bracket.rect(x0 + indentBracket,
 					 lo_y,
 					 LAYOUT.THICKNESS,
 					 (hi_y - lo_y) * progress)
 		lines.append(bracket)
-		bracket = FLine(filled=1, color=Color4(1, 0, 0, p * 0.8))
+		bracket = FLine(filled=1, color=Color4(0.7, 0.7, 0.7, p * 0.8))
 		bracket.rect(x0 + indentBracket,
 					 lo_y + (hi_y - lo_y) * progress,
 					 LAYOUT.THICKNESS,
