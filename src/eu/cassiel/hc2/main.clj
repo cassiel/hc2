@@ -27,24 +27,30 @@
 
 (defn hc1 [] (let [rot (rand)] (fn [pos] {:htag "2"
                                          :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                         :tcolourxxx (repeat 3 pos)
                                          :children [{:children (map leaf ["spiral rebound"
                                                                           "expand swing"
                                                                           "jump"])}
                                                     (leaf "obsessive")
-                                                    #_ {:children [(leaf (select-by-pos pos ["A" "B" "C" "D" "E" "F" "G" "H"]))]}
+                                                    {:children [(leaf (select-by-pos pos ["A" "B" "C" "D" "E" "F" "G" "H"]))]}
                                                     (leaf "spine")]
-                                         :rotation rot})))
+                                         :rotation 0})))
 
-(defn hc2 [] (let [rot (rand)] (fn [pos] {:vtag "backwards"
-                                         :children [{:htag "5"
-                                                     :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
-                                                     :children [{:children (map leaf ["rotate isolate"
-                                                                                      "whisk pull"
-                                                                                      "flip"])}
-                                                                 (leaf "quick")
-                                                                 #_ {:children (map leaf ["A" "B" "C" "D" "E" "F"])}
-                                                                 (leaf "arms")]}]
-                                         :rotation rot})))
+(defn hc2 [] (let [rot (rand)
+                   whisk-or-pull (if (> (rand) 0.5)
+                                   "whisk pull"
+                                   "pull whisk")]
+               (fn [pos] {:vtagxxx "backwards"
+                         :vtag (str (rand))
+                         :children [{:htag "5"
+                                     :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                     :children [{:children (map leaf ["rotate isolate"
+                                                                      whisk-or-pull
+                                                                      "flip"])}
+                                                (leaf "quick")
+                                                #_ {:children (map leaf ["A" "B" "C" "D" "E" "F"])}
+                                                (leaf "arms")]}]
+                         :rotation rot})))
 
 (defn hc3 [] (let [rot (rand)] (fn [pos] {:vtag "diagonal"
                                          :children [{:htag "1"
@@ -88,7 +94,7 @@
         (map-indexed (fn [i x] (let [p1' (+ p1 (* i interval))
                                     p2' (+ p1' interval)]
                                 (-> x
-                                    (assoc :presence (if (< i which-are-on) 1.0 0.0))
+                                    (assoc :presence (if (< i which-are-on) 1.0 0.2))
                                     (tag-presence [p1' p2'] pos))))
                      children)))
     tree))
