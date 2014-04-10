@@ -11,7 +11,7 @@ def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100):
 	"""
 	c = Color4(rgb[0], rgb[1], rgb[2], 0.8 * presence)
 	line = FLine(color=c, filled=True) \
-		.appendVectorText2(text, x, y, font="Optima", size=size)
+		.appendVectorText2(text, x, y, font="Futura", size=size)
 
 	if LAYOUT.PLANT_DEBUG:
 		canvas.lines().add(FLine(color=Color4(0, 0, 1, 0.5), filled=1).circle(6, x, y))
