@@ -5,7 +5,7 @@ string>LAYOUT = Manifest(BRACKET_PITCH = 40,
 				  TAG_DOWNSHIFT = 50,
 				  PLANT_DEBUG=False)
 
-def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100):
+def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100, invert=False):
 	"""Render a single line of text. Slightly tricky
 	   because we are rendering downwards (hence the vector shift).
 	"""
@@ -17,8 +17,15 @@ def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100):
 		canvas.lines().add(FLine(color=Color4(0, 0, 1, 0.5), filled=1).circle(6, x, y))
 
 	b = line.bounds2()
+	# Shift so we're submerged just below y. Be wary of descenders!
 	line += Vector2(0, b.h)
-	return [line, line.bounds2()]
+
+	b = line.bounds2()
+
+	if invert:
+		line.rect(b.x, b.y, b.w, b.h)
+
+	return [line, b]
 
 def renderSlug(slug, presence, x0, y0):
 	"""Takes a Manifest(clojure object). Returns [lines, bounds]."""
@@ -102,7 +109,8 @@ def renderSlug(slug, presence, x0, y0):
 							  x0,
 							  y0 + LAYOUT.TAG_DOWNSHIFT,
 							  size=tag.size,
-							  rgb=tag.colour)
+							  rgb=tag.colour,
+							  invert=True)
 
 			if tag.rot:
 				rotOffset = b.h / 2
