@@ -1,13 +1,11 @@
 string>#--{1. Clojure}
 Clojure(OKeyByName("Component_transformBlockStart:3fe07c57:142bd2deb6a:-7ff4.transient", None), r"""
 
-
 (ns user
 	(:require
 		(clojure.tools.namespace [repl :as nr])))
 
 (nr/refresh)
-
 """, globals())
 #--{\\1. Clojure}
 

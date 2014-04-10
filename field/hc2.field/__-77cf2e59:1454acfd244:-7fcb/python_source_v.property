@@ -1,29 +1,15 @@
 string>#--{1. Clojure}
 Clojure(OKeyByName("Component_transformBlockStart:3fe07c57:142bd2deb6a:-7ff4.transient", None), r"""
 
-
 (ns user
 	(:require
 		(eu.cassiel.hc2
 			[animo :as a]
 			[main :as m])))
 
+(def euroX m/euro)
+
 (defn init [] a/initial-state)
-
-(defn t1 [] (m/tree-1))
-(defn t2 [] (m/tree-2))
-(defn t3 [] (m/tree-3))
-
-(defn euro [] (m/euro))
-(defn e_knees [] (m/e-knees))
-(defn hc3 [] (m/hc3))
-(defn hc4 [] (m/hc4))
-
-(defn simple [] (m/simple))
-
 (defn step [state ms] (a/render-anims state ms))
-
-(defn box [state b cue lenMS] (m/cue-box state b cue lenMS))
-
 """, globals())
 #--{\\1. Clojure}

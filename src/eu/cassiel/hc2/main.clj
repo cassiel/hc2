@@ -51,7 +51,7 @@
                                                  (leaf arms-or-legs)]}]
                           :rotation (+ rot0 (* rotSpeed pos))})))
 
-(defn e-knees [] (let [rot0 (rand)
+(defn e_knees [] (let [rot0 (rand)
                        rotSpeed (* (srand) 0.5)
                        actions (shuffle ["spiral"
                                          "rebound"
@@ -76,38 +76,42 @@
                                                     (leaf part)]}]
                              :rotation (+ rot0 (* rotSpeed pos))})))
 
-(defn hc3 [] (let [rot0 (rand)
-                   rotSpeed (* (srand) 0.5)
-                   qualities (shuffle ["sustain" "hard" "soft" "sudden"])
-                   parts (shuffle ["legs" "shoulders" "sacrum" "chest"])
-                   times (inc (rand-nth (range 5)))]
-               (fn [pos] {:vtag "left"
-                         :tcolour [0.4 0.7 1]
-                         :children [{:htag (str times)
-                                     :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
-                                     :children [(leaf (select-by-pos pos ["melt slide"
-                                                                          "rebound float"
-                                                                          "swing hover"]))
-                                                (leaf (select-by-pos pos (concat (repeat 2 "|")
-                                                                                 ["sustain"
-                                                                                  "hard"
-                                                                                  "soft"
-                                                                                  "sudden"])))
-                                                (leaf (select-by-pos pos (concat (repeat 8 "|")
-                                                                                 ["legs"
-                                                                                  "shoulders"
-                                                                                  "sacrum"
-                                                                                  "chest"])))]}]
-                         :rotation 0.75 #_ (+ rot0 (* rotSpeed pos))})))
+(defn switcher [] (let [rot0 (rand)
+                        rotSpeed (* (srand) 0.5)
+                        qualities (shuffle ["sustain" "hard" "soft" "sudden"])
+                        parts (shuffle ["legs" "shoulders" "sacrum" "chest"])
+                        times (inc (rand-nth (range 5)))]
+                    (fn [pos] {:vtag "left"
+                              :tcolour [0.4 0.7 1]
+                              :children [{:htag (str times)
+                                          :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                          :children [(leaf (select-by-pos pos ["melt slide"
+                                                                               "rebound float"
+                                                                               "swing hover"]))
+                                                     (leaf (select-by-pos pos (concat (repeat 2 "|")
+                                                                                      ["sustain"
+                                                                                       "hard"
+                                                                                       "soft"
+                                                                                       "sudden"])))
+                                                     (leaf (select-by-pos pos (concat (repeat 8 "|")
+                                                                                      ["legs"
+                                                                                       "shoulders"
+                                                                                       "sacrum"
+                                                                                       "chest"])))]}]
+                              :rotation (+ rot0 (* rotSpeed pos))})))
 
-(defn hc4 [] (let [rot (rand)] (fn [pos] {:vtag "right"
-                                         :children [{:htag "3"
-                                                     :children [{:children (map leaf ["rise expand"
-                                                                                      "pendulum glide"
-                                                                                      "float"])}
-                                                                (leaf "hard")
-                                                                (leaf "shoulder")]}]
-                                         :rotation rot})))
+(defn original [] (let [rot0 (rand)
+                        rotSpeed (* (srand) 0.5)]
+                    (fn [pos] {:vtag "right"
+                              :tcolour [0.4 0.7 1]
+                              :children [{:htag "3"
+                                          :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                          :children [{:children (map leaf ["rise expand"
+                                                                           "pendulum glide"
+                                                                           "float"])}
+                                                     (leaf "hard")
+                                                     (leaf "shoulder")]}]
+                              :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn simple [] (fn [pos] {:vtag (when (> pos 0.5) "FREE ME")
                           :tcolour [1 0.8 0.4]
