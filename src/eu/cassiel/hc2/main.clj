@@ -51,36 +51,41 @@
                                                  (leaf arms-or-legs)]}]
                           :rotation (+ rot0 (* rotSpeed pos))})))
 
-(defn hc1 [] (let [rot0 (rand)
-                   rotSpeed (* (srand) 0.5)
-                   actions (shuffle ["spiral"
-                                     "rebound"
-                                     "expand"
-                                     "swing"
-                                     "jump"])
-                   part (rand-nth ["spine" "fingers" "knees" "chin"])]
-               (fn [pos] {:vtag "diagonal"
-                         :tcolour [0.4 0.7 1]
-                         :children [{:htag "2"
-                                     :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
-                                     :children [{:children (map leaf actions)}
-                                                (leaf (select-by-pos pos ["obsessive"
-                                                                          "obsessive"
-                                                                          "obsessive"
-                                                                          "cautious"
-                                                                          "skeptical"
-                                                                          "lustful"]))
-                                                (leaf part)]}]
-                         :rotation (+ rot0 (* rotSpeed pos))})))
+(defn e-knees [] (let [rot0 (rand)
+                       rotSpeed (* (srand) 0.5)
+                       actions (shuffle ["spiral"
+                                         "rebound"
+                                         "expand"
+                                         "swing"
+                                         "jump"])
+                       part (rand-nth ["spine"
+                                       "fingers"
+                                       "knees"
+                                   "chin"])]
+                   (fn [pos] {:vtag "diagonal"
+                             :tcolour [0.4 0.7 1]
+                             :children [{:htag "2"
+                                         :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                         :children [{:children (map leaf actions)}
+                                                    (leaf (select-by-pos pos ["obsessive"
+                                                                              "obsessive"
+                                                                              "obsessive"
+                                                                              "cautious"
+                                                                              "skeptical"
+                                                                              "lustful"]))
+                                                    (leaf part)]}]
+                             :rotation (+ rot0 (* rotSpeed pos))})))
 
-(defn hc3 [] (let [rot (rand)] (fn [pos] {:vtag "diagonal"
-                                         :children [{:htag "1"
-                                                     :children [{:children (map leaf ["melt slide"
-                                                                                      "rebound float"
-                                                                                      "swing hover"])}
-                                                                (leaf "sustain")
-                                                                (leaf "legs")]}]
-                                         :rotation rot})))
+(defn hc3 [] (let [rot0 (rand)
+                   rotSpeed (* (srand) 0.5)]
+               (fn [pos] {:vtag "diagonal"
+                         :children [{:htag "1"
+                                     :children [{:children (leaf (select-by-pos pos ["melt slide"
+                                                                                     "rebound float"
+                                                                                     "swing hover"]))}
+                                                (leaf "sustain")
+                                                (leaf "legs")]}]
+                         :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn hc4 [] (let [rot (rand)] (fn [pos] {:vtag "right"
                                          :children [{:htag "3"
