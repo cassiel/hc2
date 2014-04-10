@@ -85,12 +85,20 @@
                          :tcolour [0.4 0.7 1]
                          :children [{:htag (str times)
                                      :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
-                                     :children [{:children [(leaf (select-by-pos pos ["melt slide"
-                                                                                      "rebound float"
-                                                                                      "swing hover"]))]}
-                                                {:children (map leaf qualities)}
-                                                {:children (map leaf parts)}]}]
-                         :rotation (+ rot0 (* rotSpeed pos))})))
+                                     :children [(leaf (select-by-pos pos ["melt slide"
+                                                                          "rebound float"
+                                                                          "swing hover"]))
+                                                (leaf (select-by-pos pos (concat (repeat 2 "|")
+                                                                                 ["sustain"
+                                                                                  "hard"
+                                                                                  "soft"
+                                                                                  "sudden"])))
+                                                (leaf (select-by-pos pos (concat (repeat 8 "|")
+                                                                                 ["legs"
+                                                                                  "shoulders"
+                                                                                  "sacrum"
+                                                                                  "chest"])))]}]
+                         :rotation 0.75 #_ (+ rot0 (* rotSpeed pos))})))
 
 (defn hc4 [] (let [rot (rand)] (fn [pos] {:vtag "right"
                                          :children [{:htag "3"
