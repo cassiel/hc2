@@ -53,7 +53,7 @@
                           :rotation 0})))
 
 (defn e_knees [] (let [rot0 (rand)
-                       rotSpeed 0 #_ (* (srand) 0.5)
+                       rotSpeed (* (srand) 0.5)
                        actions (shuffle ["spiral"
                                          "rebound"
                                          "expand"
@@ -66,7 +66,8 @@
                    (fn [pos] {:vtag "diagonal"
                              :tcolour [0.4 0.7 1]
                              :children [{:htag "2"
-                                         :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                         :tcolour [1 0.8 0.4]
+                                         #_ (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
                                          :children [{:children (map leaf actions)}
                                                     (leaf (select-by-pos pos ["obsessive"
                                                                               "obsessive"
@@ -75,8 +76,7 @@
                                                                               "skeptical"
                                                                               "lustful"]))
                                                     (leaf part)]}]
-                             :rotationx (+ rot0 (* rotSpeed pos))
-                             :rotation 0})))
+                             :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn switcher [] (let [rot0 (rand)
                         rotSpeed 0 #_ (* (srand) 0.5)
