@@ -33,7 +33,7 @@
 (defn srand [] (- (* (rand) 2) 1))
 
 (defn euro [] (let [rot0 (rand)
-                    rotSpeed 0 #_ (* (srand) 0.5)
+                    rotSpeed (* (srand) 0.5)
                     whisk-or-pull (rand-nth ["whisk pull"
                                              "pull whisk"])
                     arms-or-legs (rand-nth ["arms" "legs"])
@@ -66,8 +66,7 @@
                    (fn [pos] {:vtag "diagonal"
                              :tcolour [0.4 0.7 1]
                              :children [{:htag "2"
-                                         :tcolour [1 0.8 0.4]
-                                         #_ (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
+                                         :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
                                          :children [{:children (map leaf actions)}
                                                     (leaf (select-by-pos pos ["obsessive"
                                                                               "obsessive"
@@ -79,7 +78,7 @@
                              :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn switcher [] (let [rot0 (rand)
-                        rotSpeed 0 #_ (* (srand) 0.5)
+                        rotSpeed (* (srand) 0.5)
                         qualities (shuffle ["sustain" "hard" "soft" "sudden"])
                         parts (shuffle ["legs" "shoulders" "sacrum" "chest"])
                         times (inc (rand-nth (range 5)))]
@@ -104,7 +103,7 @@
                               :rotation 0})))
 
 (defn original [] (let [rot0 (rand)
-                        rotSpeed 0 #_ (* (srand) 0.5)]
+                        rotSpeed (* (srand) 0.5)]
                     (fn [pos] {:vtag "right"
                               :tcolour [0.4 0.7 1]
                               :children [{:htag "3"
@@ -138,7 +137,7 @@
         rot0 (rand)
         rotSpeed (* (srand) 0.5)]
     (fn [pos] {:children [(call-subdivide pos [euro-1 euro-2 knees-1 knees-2 knees-3 switcher original])]
-              :rotation 0 #_ (+ rot0 (* rotSpeed pos))})))
+              :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn clip [x]
   (min 1.0 (max 0.0 x)))
@@ -161,7 +160,7 @@
                                     p2' (+ p1' interval)]
                                 (-> x
                                     (tag-progress [p1' p2'] pos)
-                                    (assoc :presence 1.0 #_ (if (< i which-are-on) 1.0 0.2)
+                                    (assoc :presence (if (< i which-are-on) 1.0 0.2)
                                            :progress (norm-in-range [p1' p2'] pos'))
                                     )))
                      children)
