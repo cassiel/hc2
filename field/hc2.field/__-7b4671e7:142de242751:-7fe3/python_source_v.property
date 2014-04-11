@@ -1,9 +1,9 @@
-string>Rendering = Manifest(PRINT = True,
+string>Rendering = Manifest(PRINT=False,
 					 OUT="/Users/nick/Desktop/Sicchio",
 					 # See NARRATIVE for running time:
 					 FRAMES=10*30,
 				     FRAME_INTERVAL=1000/30,
-					 LOOP=False)
+					 LOOP=True)
 
 def sample(pos):
 	"pos is wrt. animation frames; not too relevant here."
