@@ -16,11 +16,18 @@ def renderLeaf(text, presence, x, y, rgb=[1, 1, 1], size=100, invert=False):
 	if LAYOUT.PLANT_DEBUG:
 		canvas.lines().add(FLine(color=Color4(0, 0, 1, 0.5), filled=1).circle(6, x, y))
 
-	b = line.bounds2()
+	# Union this line with a line containing tail and descender, to get uniform
+	# spacing:
+
+	##spacer = FLine().appendVectorText2("dg", x, y, font="Futura", size=size)
+
+	top = line.bounds2().y
 	# Shift so we're submerged just below y. Be wary of descenders!
-	line += Vector2(0, y-b.y)
+	line += Vector2(0, y-top)
+	###spacer += Vector2(0, y-top)
 
 	b = line.bounds2()
+	#b.y += (y - top)
 
 	if invert:
 		line.rect(b.x, b.y, b.w, b.h)
