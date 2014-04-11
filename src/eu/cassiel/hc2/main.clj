@@ -33,7 +33,7 @@
 (defn srand [] (- (* (rand) 2) 1))
 
 (defn euro [] (let [rot0 (rand)
-                    rotSpeed (* (srand) 0.5)
+                    rotSpeed 0 #_ (* (srand) 0.5)
                     whisk-or-pull (rand-nth ["whisk pull"
                                              "pull whisk"])
                     arms-or-legs (rand-nth ["arms" "legs"])
@@ -49,10 +49,11 @@
                                                                        "flip"])}
                                                  (leaf quick-or-slow)
                                                  (leaf arms-or-legs)]}]
-                          :rotation (+ rot0 (* rotSpeed pos))})))
+                          :rotationx (+ rot0 (* rotSpeed pos))
+                          :rotation 0})))
 
 (defn e_knees [] (let [rot0 (rand)
-                       rotSpeed (* (srand) 0.5)
+                       rotSpeed 0 #_ (* (srand) 0.5)
                        actions (shuffle ["spiral"
                                          "rebound"
                                          "expand"
@@ -74,10 +75,11 @@
                                                                               "skeptical"
                                                                               "lustful"]))
                                                     (leaf part)]}]
-                             :rotation (+ rot0 (* rotSpeed pos))})))
+                             :rotationx (+ rot0 (* rotSpeed pos))
+                             :rotation 0})))
 
 (defn switcher [] (let [rot0 (rand)
-                        rotSpeed (* (srand) 0.5)
+                        rotSpeed 0 #_ (* (srand) 0.5)
                         qualities (shuffle ["sustain" "hard" "soft" "sudden"])
                         parts (shuffle ["legs" "shoulders" "sacrum" "chest"])
                         times (inc (rand-nth (range 5)))]
@@ -98,10 +100,11 @@
                                                                                        "shoulders"
                                                                                        "sacrum"
                                                                                        "chest"])))]}]
-                              :rotation (+ rot0 (* rotSpeed pos))})))
+                              :rotationx (+ rot0 (* rotSpeed pos))
+                              :rotation 0})))
 
 (defn original [] (let [rot0 (rand)
-                        rotSpeed (* (srand) 0.5)]
+                        rotSpeed 0 #_ (* (srand) 0.5)]
                     (fn [pos] {:vtag "right"
                               :tcolour [0.4 0.7 1]
                               :children [{:htag "3"
@@ -111,7 +114,8 @@
                                                                            "float"])}
                                                      (leaf "hard")
                                                      (leaf "shoulder")]}]
-                              :rotation (+ rot0 (* rotSpeed pos))})))
+                              :rotationx (+ rot0 (* rotSpeed pos))
+                              :rotation 0})))
 
 (defn simple [] (fn [pos] {:vtag (when (> pos 0.5) "FREE ME")
                           :tcolour [1 0.8 0.4]
@@ -157,7 +161,7 @@
                                     p2' (+ p1' interval)]
                                 (-> x
                                     (tag-progress [p1' p2'] pos)
-                                    (assoc :presence (if (< i which-are-on) 1.0 0.2)
+                                    (assoc :presence 1.0 #_ (if (< i which-are-on) 1.0 0.2)
                                            :progress (norm-in-range [p1' p2'] pos'))
                                     )))
                      children)
