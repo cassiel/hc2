@@ -1,8 +1,9 @@
 string>Rendering = Manifest(PRINT = True,
 					 OUT="/Users/nick/Desktop/Sicchio",
-					 FRAMES=500,
-				     FRAME_INTERVAL=33,
-					 LOOP=True)
+					 # See NARRATIVE for running time:
+					 FRAMES=10*30,
+				     FRAME_INTERVAL=1000/30,
+					 LOOP=False)
 
 def sample(pos):
 	"pos is wrt. animation frames; not too relevant here."
@@ -44,6 +45,8 @@ def start():
 		_self.printer_ = JPEGPrinter(canvas, Rendering.OUT)
 		_self.printer_.start()
 		_self.frameCounter_ = 0
+		# Run a system:
+		_self.find[VEs.NARRATIVE][0]()
 
 	label_NW(_self, "RUNNING")
 
@@ -62,5 +65,6 @@ def done():
 	if _self.printer_: _self.printer_.stop()
 	label_NW(_self)
 	canvas.lines().clear()
+	_self.state_ = _clojure.init()
 
 _r = (start, doit(), done)

@@ -27,6 +27,7 @@ VEs = Manifest(CLOJURERELOAD="m_ClojureReload",
 			   CUES_FROM_OSC="Cues from OSC",
 			   HELLO_DOLLY="Hello Dolly",
 			   ANNOTATION="Annotation",
+			   NARRATIVE="Narrative",
 			   CAMERA="Camera",
 			   HAL="HAL",
 			   MAIN="MAIN")
