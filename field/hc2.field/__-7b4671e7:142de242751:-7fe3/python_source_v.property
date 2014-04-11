@@ -1,6 +1,18 @@
-string>def sample(pos):
+string>Rendering = Manifest(PRINT = True,
+					 OUT="/Users/nick/Desktop/Sicchio",
+					 FRAMES=500,
+				     FRAME_INTERVAL=33,
+					 LOOP=True)
+
+def sample(pos):
 	"pos is wrt. animation frames; not too relevant here."
-	data, newState = _clojure.step(_self.state_, System.currentTimeMillis())
+	if Rendering.PRINT:
+		_self.frameCounter_ += 1
+		t = _self.frameCounter_ * Rendering.FRAME_INTERVAL
+	else:
+		t = System.currentTimeMillis()
+
+	data, newState = _clojure.step(_self.state_, t)
 	_self.state_ = newState
 
 	canvas.lines().clear()
@@ -21,8 +33,6 @@ string>def sample(pos):
 				r += CFrame(r=Math.PI * 2 * rot)
 				canvas.lines().add(r)
 
-PRINT = False
-
 def start():
 	_self.find[VEs.ANNOTATION][0]()
 	_self.find[VEs.CLOJURERELOAD][0]()
@@ -30,23 +40,21 @@ def start():
 
 	_self.state_ = _clojure.init()
 
-	if PRINT:
-		_self.printer_ = JPEGPrinter(canvas, "/Users/nick/Desktop/Sicchio")
+	if Rendering.PRINT:
+		_self.printer_ = JPEGPrinter(canvas, Rendering.OUT)
 		_self.printer_.start()
+		_self.frameCounter_ = 0
 
 	label_NW(_self, "RUNNING")
 
-FRAMES = 500
-LOOP = True
-
 def doit():
 	while True:
-		for i in range(FRAMES):
+		for i in range(Rendering.FRAMES):
 			#print i
-			sample(i / float(FRAMES))
+			sample(i / float(Rendering.FRAMES))
 			yield True
 
-		if not LOOP: break
+		if not Rendering.LOOP: break
 
 	_self.end()
 
