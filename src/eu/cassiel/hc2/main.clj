@@ -74,7 +74,7 @@
                                                                               "skeptical"
                                                                               "lustful"]))
                                                     (leaf part)]}]
-                             :rotation 0 #_ (+ rot0 (* rotSpeed pos))})))
+                             :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn switcher [] (let [rot0 (rand)
                         rotSpeed (* (srand) 0.5)
