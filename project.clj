@@ -12,8 +12,10 @@
   :plugins [[lein-midje "3.1.1"]
             [lein-field "0.3.0-SNAPSHOT"]]
   :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.4"]
+                                  [lein-light-nrepl "0.0.17"]
                                   [midje "1.5.1"]]
                    :source-paths ["dev"]}}
+  :repl-options {:nrepl-middleware [lighttable.nrepl.handler/lighttable-ops]}
   :field-arguments {:noHistory 0
                     ;; :timer.interval 0.033
                     :editorFont "Courier"
