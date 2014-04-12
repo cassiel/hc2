@@ -119,6 +119,12 @@
                           :tcolour [1 0.8 0.4]
                           :children (map leaf ["Symphony" "Destiny" "Rhapsody" "Melody" "Harmony"])}))
 
+(defn filling [] ["FILLING"])
+
+(defn template [] (fn [pos] {:vtag "TEMPLATE"
+                            :tcolour [1 0.8 0.4]
+                            :children (map leaf (map str (filling)))}))
+
 (defn call-subdivide [pos fn-list]
   (let [c (count fn-list)
         super-pos (* pos c)
