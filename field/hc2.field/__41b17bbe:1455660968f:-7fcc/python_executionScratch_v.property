@@ -1,2 +1,7 @@
 string>_self.in_play = True
 _self.tintColour = Color4(1.0, 0.9, 0, 0.3)
+
+
+
+lt_start()
+lt_stop()

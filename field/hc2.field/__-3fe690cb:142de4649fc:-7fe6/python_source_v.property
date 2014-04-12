@@ -20,7 +20,7 @@ def stop():
         if n is not None:
                 _clojure.nrepl_stop(n)
 
-        _self.nrepl_server = None
+        _self.nrepl_server_ = None
         label_NW(_self, None)
 
 def doit():
