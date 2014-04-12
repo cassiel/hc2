@@ -1,0 +1,42 @@
+string>#--{1. Clojure}
+Clojure(OKeyByName("Component_transformBlockStart:-3fe690cb:142de4649fc:-7fe5.transient", None), r"""
+
+(ns user
+	(:require
+		(lighttable.nrepl
+			[core :as c]
+			[handler :as h)
+		(clojure.tools.nrepl
+			[server :as s])))
+
+(defn lt_nrepl_start [port]
+	(reset!
+		c/server
+		(s/start-server :port port :handler (s/default-handler #'h/lighttable-ops))))
+
+(defn lt_nrepl_stop [s] (s/stop-server c/server))
+""", globals())
+#--{\\1. Clojure}
+
+PORT = 4555
+
+_self.nrepl_server_ = None
+
+def stop():
+        n = _self.nrepl_server_
+        if n is not None:
+                _clojure.nrepl_stop(n)
+
+        _self.nrepl_server = None
+        label_NW(_self, None)
+
+def doit():
+        pass
+
+def start():
+        stop()
+
+        _self.nrepl_server_ = _clojure.nrepl_start(PORT)
+        label_NW(_self, "port %d" % PORT)
+
+#_r = (start, doit, stop)
