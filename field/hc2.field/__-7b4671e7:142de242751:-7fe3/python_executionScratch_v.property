@@ -19,8 +19,8 @@ for _ in range(1): cueBox(_clojure.original)
 ###
 
 _self.state_ = _clojure.init()
-_self.state_ = _clojure.cue_box(_clojure.init(), _clojure.euro(), 0, 180000)
-_self.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(), 0, 600 * 1000)
+_self.state_ = _clojure.cue_box(_self.state_, _clojure.euro(), 0, 180000)
+_self.state_ = _clojure.cue_box(_self.state_, _clojure.e_knees(), 0, 10 * 1000)
 _self.state_ = _clojure.cue_box(_clojure.init(), _clojure.switcher(), 0, 180000)
 _self.state_ = _clojure.cue_box(_clojure.init(), _clojure.original(), 0, 180000)
 

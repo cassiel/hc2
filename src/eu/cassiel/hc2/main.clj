@@ -49,8 +49,7 @@
                                                                        "flip"])}
                                                  (leaf quick-or-slow)
                                                  (leaf arms-or-legs)]}]
-                          :rotationx (+ rot0 (* rotSpeed pos))
-                          :rotation 0})))
+                          :rotation (+ rot0 (* rotSpeed pos))})))
 
 (defn e_knees [] (let [rot0 (rand)
                        rotSpeed (* (srand) 0.5)
