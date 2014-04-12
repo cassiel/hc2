@@ -12,7 +12,9 @@ string>#--{1. Clojure}
 (defn lt_nrepl_start [port]
 	(reset!
 		c/server
-		(s/start-server :port port :handler (s/default-handler #'h/lighttable-ops))))
+		(s/start-server
+			:port port
+			:handler (s/default-handler #'h/lighttable-ops))))
 
 (defn lt_nrepl_stop [s] (s/stop-server c/server))
 """, globals())
@@ -34,7 +36,7 @@ def lt_doit():
         pass
 
 def lt_start():
-        stop()
+        lt_stop()
 
         _self.nrepl_server_ = _clojure.lt_nrepl_start(PORT)
         label_NW(_self, "port %d" % PORT)
