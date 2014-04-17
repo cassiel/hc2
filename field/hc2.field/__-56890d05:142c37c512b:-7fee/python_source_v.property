@@ -5,6 +5,7 @@ string>#--{1. Clojure}
 	(:require
 		(clojure.tools.namespace [repl :as nr])))
 
+(println *clojure-version*)
 (nr/refresh)
 """, globals())
 #--{\\1. Clojure}
