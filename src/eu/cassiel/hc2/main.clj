@@ -98,8 +98,8 @@
                                                                                        "shoulders"
                                                                                        "sacrum"
                                                                                        "chest"])))]}]
-                              :rotationx (+ rot0 (* rotSpeed pos))
-                              :rotation 0})))
+                              :rotation (+ rot0 (* rotSpeed pos))
+                              :rotationx 0})))
 
 (defn original [] (let [rot0 (rand)
                         rotSpeed (* (srand) 0.5)]
@@ -112,8 +112,8 @@
                                                                            "float"])}
                                                      (leaf "hard")
                                                      (leaf "shoulder")]}]
-                              :rotationx (+ rot0 (* rotSpeed pos))
-                              :rotation 0})))
+                              :rotation (+ rot0 (* rotSpeed pos))
+                              :rotationx 0})))
 
 (defn simple [] (fn [pos] {:vtag (when (> pos 0.5) "FREE ME")
                           :tcolour [1 0.8 0.4]
