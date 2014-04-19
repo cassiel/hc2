@@ -1,3 +1,6 @@
 string>_self.find[VEs.CLOJUREBIND][0]()
 main = _self.find[VEs.MAIN][0]
-main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(), 0, 180000)
+main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(),      0, 10000)
+main.state_ = _clojure.cue_box(main.state_,     _clojure.euro(),     10000, 10000)
+main.state_ = _clojure.cue_box(main.state_,     _clojure.switcher(), 20000, 10000)
+main.state_ = _clojure.cue_box(main.state_,     _clojure.original(), 30000, 10000)
