@@ -57,7 +57,7 @@
                                          "rebound"
                                          "expand"
                                          "swing"
-                                         (jumper)])
+                                         :HERE])
                        part (rand-nth ["spine"
                                        "fingers"
                                        "knees"
@@ -66,7 +66,10 @@
                              :tcolour [0.4 0.7 1]
                              :children [{:htag "2"
                                          :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
-                                         :children [{:children (map leaf actions)}
+                                         :children [{:children (map leaf
+                                                                    (replace
+                                                                     {:HERE (jumper)}
+                                                                     actions))}
                                                     (leaf (select-by-pos pos ["obsessive"
                                                                               "obsessive"
                                                                               "obsessive"
