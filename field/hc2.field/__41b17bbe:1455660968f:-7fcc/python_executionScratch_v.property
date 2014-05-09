@@ -1,5 +1,5 @@
 string>_self.in_play = True
-_self.tintColour = Color4(1.0, 0.9, 0, 0.3)
+_self.tintColour = Color4(0.6, 1, 1, 0.3)
 
 
 

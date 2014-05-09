@@ -2,3 +2,12 @@ string>_self.tintColour = Color4(0.3, 1, 0.3, 0.3)
 _self.in_play = True
 
 main.state_ = _clojure.init()
+
+
+main.state_ = _clojure.init()
+main.state_ = _clojure.cue_box(main.state_, _clojure.euro(), 0, 180000)
+main.state_ = _clojure.cue_box(main.state_, _clojure.e_knees(), 0, 60 * 1000)
+main.state_ = _clojure.cue_box(_clojure.init(), _clojure.switcher(), 0, 180000)
+main.state_ = _clojure.cue_box(_clojure.init(), _clojure.original(), 0, 180000)
+
+main.state_ = _clojure.cue_box(main.state_, _clojure.template(), 0, 600 * 1000)
