@@ -24,13 +24,16 @@
 (defn select-by-pos [pos a]
   (nth a (int (* pos (count a)))))
 
-(defn jumper [] "jump")
+(defn live-jumper [] "jump")
 
 (defn my-rot [pos] (* 0 (rand)))
 
 (defn coin [] (> (rand) 0.5))
 
 (defn srand [] (- (* (rand) 2) 1))
+
+(defn wrap-call [f]
+  (str (try (f) (catch Exception e "---"))))
 
 (defn euro [] (let [rot0 (rand)
                     rotSpeed (* (srand) 0.5)
@@ -68,7 +71,7 @@
                                          :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
                                          :children [{:children (map leaf
                                                                     (replace
-                                                                     {:HERE (jumper)}
+                                                                     {:HERE (wrap-call live-jumper)}
                                                                      actions))}
                                                     (leaf (select-by-pos pos ["obsessive"
                                                                               "obsessive"
