@@ -1,7 +1,7 @@
 string>_self.find[VEs.CLOJUREBIND][0]()
 _self.state_ = _clojure.cue_box(_clojure.init(), _clojure.uberbox(), 0, 20000)
 
-###
+### MAIN PROGRAM ###
 
 cuePoint = 10 * 1000
 def cueBox(box):
@@ -43,12 +43,3 @@ _self.state_ = _clojure.box(_clojure.init(), _clojure.simple(), 0, 10000)
 _self.state_ = _clojure.init()
 
 ###
-
-_self.printer_ = JPEGPrinter(canvas, "/Users/nick/Desktop/IJAD")
-_self.printer_.start()
-_self.printer_.stop()
-
-
-_self.in_play = True
-
-VEs.CLOJUREBIND

@@ -1,6 +1,27 @@
-string>_self.find[VEs.CLOJUREBIND][0]()
-main = _self.find[VEs.MAIN][0]
-main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(),      0, 10000)
-main.state_ = _clojure.cue_box(main.state_,     _clojure.euro(),     10000, 10000)
-main.state_ = _clojure.cue_box(main.state_,     _clojure.switcher(), 20000, 10000)
-main.state_ = _clojure.cue_box(main.state_,     _clojure.original(), 30000, 10000)
+string>main = _self.find[VEs.MAIN][0]
+
+PRINT_RUN = False
+PERFORMANCE_RUN = True
+
+
+if PRINT_RUN:
+	_self.find[VEs.CLOJUREBIND][0]()
+	main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(),      0, 10000)
+	main.state_ = _clojure.cue_box(main.state_,     _clojure.euro(),     10000, 10000)
+	main.state_ = _clojure.cue_box(main.state_,     _clojure.switcher(), 20000, 10000)
+	main.state_ = _clojure.cue_box(main.state_,     _clojure.original(), 30000, 10000)
+
+if PERFORMANCE_RUN:
+	_self.find[VEs.CLOJURERELOAD][0]()
+	cuePoint = 10 * 1000
+	def cueBox(box):
+		interval = 180 * 1000
+		global cuePoint
+		main.state_ = _clojure.cue_box(main.state_, box(), cuePoint, interval)
+		cuePoint += interval
+
+	main.state_ = _clojure.init()
+	for _ in range(2): cueBox(_clojure.euro)
+	for _ in range(3): cueBox(_clojure.e_knees)
+	for _ in range(1): cueBox(_clojure.switcher)
+	for _ in range(1): cueBox(_clojure.original)
