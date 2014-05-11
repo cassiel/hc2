@@ -24,7 +24,11 @@
 (defn select-by-pos [pos a]
   (nth a (int (* pos (count a)))))
 
-(defn live-jumper [] "jump")
+(defn live-jumper-1 [] "jump")
+(defn live-jumper-2 [] "spiral")
+(defn live-jumper-3 [] "rebound")
+(defn live-jumper-4 [] "expand")
+(defn live-jumper-5 [] "swing")
 
 (defn my-rot [pos] (* 0 (rand)))
 
@@ -33,7 +37,9 @@
 (defn srand [] (- (* (rand) 2) 1))
 
 (defn wrap-call [f]
-  (str (try (f) (catch Exception e "---"))))
+  (str
+   (try (f)
+        (catch Exception e "---"))))
 
 (defn euro [] (let [rot0 (rand)
                     rotSpeed (* (srand) 0.5)
@@ -56,11 +62,7 @@
 
 (defn e_knees [] (let [rot0 (rand)
                        rotSpeed (* (srand) 0.5)
-                       actions (shuffle ["spiral"
-                                         "rebound"
-                                         "expand"
-                                         "swing"
-                                         :HERE])
+                       actions (shuffle [:H1 :H2 :H3 :H4 :H5])
                        part (rand-nth ["spine"
                                        "fingers"
                                        "knees"
@@ -71,7 +73,11 @@
                                          :tcolour (if (> pos 0.8) [1 0.8 0.4] [0.3 0.3 0.3])
                                          :children [{:children (map leaf
                                                                     (replace
-                                                                     {:HERE (wrap-call live-jumper)}
+                                                                     {:H1 (wrap-call live-jumper-1)
+                                                                      :H2 (wrap-call live-jumper-2)
+                                                                      :H3 (wrap-call live-jumper-3)
+                                                                      :H4 (wrap-call live-jumper-4)
+                                                                      :H5 (wrap-call live-jumper-5)}
                                                                      actions))}
                                                     (leaf (select-by-pos pos ["obsessive"
                                                                               "obsessive"

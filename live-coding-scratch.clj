@@ -1,3 +1,3 @@
 (ns eu.cassiel.hc2.main)
 
-(defn live-jumper [] "jump")
+(defn live-jumper [] "xxxxjump")
