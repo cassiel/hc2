@@ -13,7 +13,7 @@ if PRINT_RUN:
 
 if PERFORMANCE_RUN:
 	_self.find[VEs.CLOJURERELOAD][0]()
-	cuePoint = 0 * 1000
+	cuePoint = 10 * 1000
 	def cueBox(box):
 		interval = 180 * 1000
 		global cuePoint
