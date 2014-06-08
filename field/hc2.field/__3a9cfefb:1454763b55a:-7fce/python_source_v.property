@@ -6,10 +6,14 @@ PERFORMANCE_RUN = True
 
 if PRINT_RUN:
 	_self.find[VEs.CLOJUREBIND][0]()
-	main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(),      0, 10000)
-	main.state_ = _clojure.cue_box(main.state_,     _clojure.euro(),     10000, 10000)
-	main.state_ = _clojure.cue_box(main.state_,     _clojure.switcher(), 20000, 10000)
-	main.state_ = _clojure.cue_box(main.state_,     _clojure.original(), 30000, 10000)
+	# 15 mins (15 * 60 sec * 30fps) duration. Four segments, 225 secs each.
+	MINS = 15
+	FPS = 30
+	SEG = MINS * 60 * FPS / 4
+	main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(),      0, SEG)
+	main.state_ = _clojure.cue_box(main.state_,     _clojure.euro(),     1 * SEG, SEG)
+	main.state_ = _clojure.cue_box(main.state_,     _clojure.switcher(), 2 * SEG, SEG)
+	main.state_ = _clojure.cue_box(main.state_,     _clojure.original(), 3 * SEG, SEG)
 
 if PERFORMANCE_RUN:
 	_self.find[VEs.CLOJURERELOAD][0]()
