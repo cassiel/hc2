@@ -10,6 +10,11 @@ def sample(pos):
 	if Rendering.PRINT:
 		_self.frameCounter_ += 1
 		t = _self.frameCounter_ * Rendering.FRAME_INTERVAL
+		print "POS=%f, FRAME %d/%d, SECS = %f" \
+				% (pos,
+				   _self.frameCounter_,
+				   Rendering.FRAMES,
+				   t / 1000.0)
 	else:
 		t = System.currentTimeMillis()
 

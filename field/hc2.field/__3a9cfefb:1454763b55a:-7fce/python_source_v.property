@@ -1,22 +1,23 @@
 string>main = _self.find[VEs.MAIN][0]
 
-PRINT_RUN = False
-PERFORMANCE_RUN = True
-
+PRINT_RUN = True
+PERFORMANCE_RUN = False
 
 if PRINT_RUN:
 	_self.find[VEs.CLOJUREBIND][0]()
-	# 15 mins (15 * 60 sec * 30fps) duration. Four segments, 225 secs each.
+	# 15 mins (15 * 60 sec) duration. Five segments, 3 mins each.
+	# (Even in 30FPS "print" mode, we get times passed through to us in msec.)
 	MINS = 15
-	FPS = 30
-	SEG = MINS * 60 * FPS / 4
-	main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(),      0, SEG)
+	SEG = MINS * 60 * 1000 / 4
+	main.state_ = _clojure.cue_box(_clojure.init(), _clojure.e_knees(),        0, SEG)
 	main.state_ = _clojure.cue_box(main.state_,     _clojure.euro(),     1 * SEG, SEG)
 	main.state_ = _clojure.cue_box(main.state_,     _clojure.switcher(), 2 * SEG, SEG)
 	main.state_ = _clojure.cue_box(main.state_,     _clojure.original(), 3 * SEG, SEG)
+	main.state_ = _clojure.cue_box(main.state_,     _clojure.e_knees(),  4 * SEG, SEG)
 
 if PERFORMANCE_RUN:
 	_self.find[VEs.CLOJURERELOAD][0]()
+	# Enough time for Nick to get to the iPad for the music:
 	cuePoint = 10 * 1000
 	def cueBox(box):
 		interval = 180 * 1000
