@@ -1,7 +1,7 @@
 string>main = _self.find[VEs.MAIN][0]
 
-PRINT_RUN = True
-PERFORMANCE_RUN = False
+PRINT_RUN = False
+PERFORMANCE_RUN = True
 
 if PRINT_RUN:
 	_self.find[VEs.CLOJUREBIND][0]()
