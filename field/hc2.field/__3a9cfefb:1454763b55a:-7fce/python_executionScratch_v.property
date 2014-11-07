@@ -12,3 +12,10 @@ main.state_ = _clojure.cue_box(_clojure.init(), _clojure.switcher(), 0, 180000)
 main.state_ = _clojure.cue_box(_clojure.init(), _clojure.original(), 0, 180000)
 
 main.state_ = _clojure.cue_box(main.state_, _clojure.template(), 0, 600 * 1000)
+
+main.state_
+
+
+
+
+_clojure.step(_clojure.cue_box(main.state_, _clojure.euro(), 0, 10000), System.currentTimeMillis())

@@ -192,3 +192,8 @@
               (fn [state] (fn [state pos] [(tag-progress (box pos) [0.0 1.0] pos) state]))
               cue
               len))
+
+;; For Kate:
+(def ^:dynamic *saved* (atom nil))
+(defn __save [state] (reset *saved* state))
+(defn __examine [] (deref *saved))
