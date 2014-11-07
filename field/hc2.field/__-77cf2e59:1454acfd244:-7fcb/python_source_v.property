@@ -9,5 +9,6 @@ string>#--{1. Clojure}
 
 (defn init [] a/initial-state)
 (defn step [state ms] (a/render-anims state ms))
+(defn xxsave [state] (__save state))
 """, globals())
 #--{\\1. Clojure}

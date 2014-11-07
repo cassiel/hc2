@@ -195,5 +195,5 @@
 
 ;; For Kate:
 (def ^:dynamic *saved* (atom nil))
-(defn __save [state] (reset *saved* state))
-(defn __examine [] (deref *saved))
+(defn __save [state] (reset! *saved* state))
+(defn __examine [] (deref *saved*))
