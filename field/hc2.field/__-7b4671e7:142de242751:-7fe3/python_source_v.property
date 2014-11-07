@@ -3,7 +3,7 @@ string>Rendering = Manifest(PRINT=False,
 					 # See NARRATIVE for running time:
 					 FRAMES=15*60*30,		# 15 minutes
 				     FRAME_INTERVAL=1000/30,
-					 LOOP=False)
+					 LOOP=True)
 
 def sample(pos):
 	"pos is wrt. animation frames; not too relevant here."
@@ -20,6 +20,7 @@ def sample(pos):
 
 	data, newState = _clojure.step(_self.state_, t)
 	_self.state_ = newState
+	_clojure.xxsave(data)
 
 	canvas.lines().clear()
 
