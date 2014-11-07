@@ -19,8 +19,12 @@
 (defn live-jumper-5 [] "swing")
 
 
-;; Fire this statement to see the current phrase (if any):
-(__examine)
+;; Fire this statement to see the current phrase (if any). This will
+;; pretty-print *into the console* at the bottom (View->Console).
+;; (Look at :presence - this is the level of the text. 1.0 is white,
+;; 0.2 is "disabled" grey.)
+
+(clojure.pprint/pprint (__examine))
 
 
 ;; Notes for Nick:
